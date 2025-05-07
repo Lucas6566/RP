@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2024/12/19 21:36:23.000.176,=C:\Users\PC-LUCAS\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2024/12/26 19:56:27.000.176,=C:\Users\PC-LUCAS\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2025/03/08 17:03:21.000.732,=C:\Users\PC-LUCAS\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2025/04/14 23:42:33.000.334,=C:\Users\PC-LUCAS\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2025/04/15 00:10:11.000.592,=C:\Users\PC-LUCAS\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2025/04/23 20:39:32.000.677,=C:\Users\PC-LUCAS\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2025/04/23 21:57:23.000.531,=C:\Users\PC-LUCAS\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2025/04/29 22:30:08.000.613,=C:\Users\PC-LUCAS\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2025/04/29 22:32:53.000.694,C:\Users\PC-LUCAS\Documents\Embarcadero\Studio\Projects\Unit1.pas=C:\Projetos\Pessoais\Rp\frontend\src\view\Rp.View.Principal.pas</Transaction>
+    <Transaction>2025/04/29 22:32:53.000.694,C:\Users\PC-LUCAS\Documents\Embarcadero\Studio\Projects\Unit1.dfm=C:\Projetos\Pessoais\Rp\frontend\src\view\Rp.View.Principal.dfm</Transaction>
+    <Transaction>2025/04/29 23:15:36.000.885,C:\Users\PC-LUCAS\Documents\Embarcadero\Studio\Projects\Project1.dproj=C:\Projetos\Pessoais\Rp\frontend\RP.dproj</Transaction>
+    <Transaction>2025/05/01 11:47:13.000.199,=C:\Projetos\Pessoais\Rp\frontend\Unit1.pas</Transaction>
+    <Transaction>2025/05/01 12:01:38.000.761,C:\Projetos\Pessoais\Rp\frontend\Unit1.pas=C:\Projetos\Pessoais\Rp\Doc\UnitsTestes\Unit1.pas</Transaction>
+    <Transaction>2025/05/01 12:01:38.000.761,C:\Projetos\Pessoais\Rp\frontend\Unit1.dfm=C:\Projetos\Pessoais\Rp\Doc\UnitsTestes\Unit1.dfm</Transaction>
+    <Transaction>2025/05/01 12:04:01.000.851,=C:\Projetos\Pessoais\Rp\Doc\UnitsTestes\Unit1.pas</Transaction>
+    <Transaction>2025/05/01 12:29:24.000.294,=C:\Projetos\Pessoais\Rp\frontend\Unit2.pas</Transaction>
+    <Transaction>2025/05/01 12:32:00.000.851,=C:\Projetos\Pessoais\Rp\frontend\Unit2.pas</Transaction>
+    <Transaction>2025/05/01 12:32:31.000.799,C:\Projetos\Pessoais\Rp\frontend\Unit2.dfm=C:\Projetos\Pessoais\Rp\frontend\src\view\base\RP.View.Base.dfm</Transaction>
+    <Transaction>2025/05/01 12:32:31.000.799,C:\Projetos\Pessoais\Rp\frontend\Unit2.pas=C:\Projetos\Pessoais\Rp\frontend\src\view\base\RP.View.Base.pas</Transaction>
+    <Transaction>2025/05/01 12:35:13.000.165,=C:\Projetos\Pessoais\Rp\frontend\Unit2.pas</Transaction>
+    <Transaction>2025/05/01 12:35:31.000.948,C:\Projetos\Pessoais\Rp\frontend\Unit2.pas=C:\Projetos\Pessoais\Rp\frontend\src\view\base\RP.View.Base.Pesquisa.pas</Transaction>
+    <Transaction>2025/05/01 12:35:31.000.948,C:\Projetos\Pessoais\Rp\frontend\Unit2.dfm=C:\Projetos\Pessoais\Rp\frontend\src\view\base\RP.View.Base.Pesquisa.dfm</Transaction>
+    <Transaction>2025/05/01 12:48:05.000.922,=C:\Projetos\Pessoais\Rp\frontend\Unit2.pas</Transaction>
+    <Transaction>2025/05/01 12:48:34.000.387,C:\Projetos\Pessoais\Rp\frontend\src\view\base\RP.View.Base.Pesquisa.pas=</Transaction>
+    <Transaction>2025/05/01 12:48:48.000.687,C:\Projetos\Pessoais\Rp\frontend\Unit2.pas=C:\Projetos\Pessoais\Rp\frontend\src\view\base\RP.View.Base.Pesquisa.pas</Transaction>
+    <Transaction>2025/05/01 12:48:48.000.687,C:\Projetos\Pessoais\Rp\frontend\Unit2.dfm=C:\Projetos\Pessoais\Rp\frontend\src\view\base\RP.View.Base.Pesquisa.dfm</Transaction>
+    <Transaction>2025/05/01 12:51:52.000.167,=C:\Projetos\Pessoais\Rp\frontend\Unit2.pas</Transaction>
+    <Transaction>2025/05/01 12:53:10.000.449,C:\Projetos\Pessoais\Rp\frontend\src\view\pesquisa\Rp.View.Pesquisa.Cidade.dfm=C:\Projetos\Pessoais\Rp\frontend\Unit2.dfm</Transaction>
+    <Transaction>2025/05/01 12:53:10.000.449,C:\Projetos\Pessoais\Rp\frontend\src\view\pesquisa\Rp.View.Pesquisa.Cidade.pas=C:\Projetos\Pessoais\Rp\frontend\Unit2.pas</Transaction>
+    <Transaction>2025/05/01 13:08:12.000.537,=C:\Projetos\Pessoais\Rp\frontend\src\model\entity\RpServer.Model.Entity.VendaParcela.pas</Transaction>
+    <Transaction>2025/05/01 13:08:12.000.418,=C:\Projetos\Pessoais\Rp\frontend\src\model\entity\RpServer.Model.Entity.Bairro.pas</Transaction>
+    <Transaction>2025/05/01 13:08:12.000.471,=C:\Projetos\Pessoais\Rp\frontend\src\model\entity\RpServer.Model.Entity.Funcionario.pas</Transaction>
+    <Transaction>2025/05/01 13:08:12.000.458,=C:\Projetos\Pessoais\Rp\frontend\src\model\entity\RpServer.Model.Entity.FormaPagamento.pas</Transaction>
+    <Transaction>2025/05/01 13:08:12.000.496,=C:\Projetos\Pessoais\Rp\frontend\src\model\entity\RpServer.Model.Entity.TipoServico.pas</Transaction>
+    <Transaction>2025/05/01 13:08:12.000.484,=C:\Projetos\Pessoais\Rp\frontend\src\model\entity\RpServer.Model.Entity.Servico.pas</Transaction>
+    <Transaction>2025/05/01 13:08:12.000.550,=C:\Projetos\Pessoais\Rp\frontend\src\model\entity\RpServer.Model.Entity.VendaServico.pas</Transaction>
+    <Transaction>2025/05/01 13:08:12.000.446,=C:\Projetos\Pessoais\Rp\frontend\src\model\entity\RpServer.Model.Entity.Cliente.pas</Transaction>
+    <Transaction>2025/05/01 13:08:12.000.524,=C:\Projetos\Pessoais\Rp\frontend\src\model\entity\RpServer.Model.Entity.Venda.pas</Transaction>
+    <Transaction>2025/05/01 13:08:12.000.432,=C:\Projetos\Pessoais\Rp\frontend\src\model\entity\RpServer.Model.Entity.Cidade.pas</Transaction>
+    <Transaction>2025/05/01 13:08:12.000.510,=C:\Projetos\Pessoais\Rp\frontend\src\model\entity\RpServer.Model.Entity.Usuario.pas</Transaction>
+    <Transaction>2025/05/01 13:10:16.000.476,=C:\Projetos\Pessoais\Rp\frontend\src\model\dao\RpServer.Model.Dao.Generic.pas</Transaction>
+  </Transactions>
+</BorlandProject>

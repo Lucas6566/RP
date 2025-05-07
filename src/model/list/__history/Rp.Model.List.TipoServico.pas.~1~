@@ -1,0 +1,183 @@
+unit Rp.Model.List.TipoServico;
+
+interface
+
+uses
+  Rp.Model.Entity.TipoServico,
+  System.Generics.Collections,
+  System.JSON,
+  REST.JSON,
+  Data.DB,
+
+  FireDAC.Stan.Intf,
+  FireDAC.Stan.Option,
+  FireDAC.Stan.Param,
+  FireDAC.Stan.Error,
+  FireDAC.DatS,
+  FireDAC.Phys.Intf,
+  FireDAC.DApt.Intf,
+  FireDAC.Comp.DataSet,
+  FireDAC.Comp.Client,
+
+  DataSet.Serialize;
+
+type
+  iListTipoServico = Interface
+    ['{83928C9F-2286-4132-BDC6-83BFE9EC608C}']
+    function GeneratorJson( aObject : TTipoServico ) : TJSONObject;
+    function GetJson : TJSONObject;
+
+    function SetData(aJson: TJSONValue): iListTipoServico;
+    function SetList(aJson: TJSONArray): iListTipoServico;
+    function SetDataSet(aJson: TJSONArray): iListTipoServico;
+
+    function LocalizaList: TTipoServico;
+
+    function DataSet: TDataSet;
+  End;
+
+
+  TListTipoServico = Class(TInterfacedObject, iListTipoServico)
+  private
+    FList : TObjectList<TTipoServico>;
+    FDataSet : TFDMemTable;
+    FRecordCount : Integer;
+
+    procedure CreateFieldsDataSet;
+    function ObjectToJson( aObject : TTipoServico ) : TJSONObject;
+    function JsonToObject(aJson: TJSONObject): TTipoServico;
+  public
+    constructor Create;
+    destructor Destroy; override;
+    class function New : iListTipoServico;
+
+  public
+    function GeneratorJson( aObject : TTipoServico ) : TJSONObject;
+    function GetJson : TJSONObject;
+
+    function SetData(aJson: TJSONValue): iListTipoServico;
+    function SetList(aJson: TJSONArray): iListTipoServico;
+    function SetDataSet(aJson: TJSONArray): iListTipoServico;
+
+    function LocalizaList: TTipoServico;
+
+    function DataSet: TDataSet;
+  End;
+
+implementation
+
+{ TListTipoServico }
+
+function TListTipoServico.GeneratorJson( aObject : TTipoServico ) : TJSONObject;
+begin
+  Result := ObjectToJson(aObject);
+end;
+
+function TListTipoServico.GetJson: TJSONObject;
+begin
+  Result := nil;
+  for var I := 0 to FList.Count-1 do
+  begin
+    if FList.Items[I].id = FDataSet.FieldByName('id').AsInteger then
+    begin
+      Result := ObjectToJson(FList.Items[I]);
+      Break;
+    end;
+  end;
+end;
+
+function TListTipoServico.JsonToObject(aJson: TJSONObject): TTipoServico;
+begin
+  Result := TJson.JsonToObject<TTipoServico>(aJson, []);
+end;
+
+function TListTipoServico.LocalizaList: TTipoServico;
+begin
+  Result := nil;
+  for var I := 0 to FList.Count-1 do
+  begin
+    if FList.Items[I].id = FDataSet.FieldByName('id').AsInteger then begin
+      Result := FList.Items[I];
+      break;
+    end;
+  end;
+end;
+
+constructor TListTipoServico.Create;
+begin
+  FList := TObjectList<TTipoServico>.Create;
+  FDataSet := TFDMemTable.Create(nil);
+  CreateFieldsDataSet;
+end;
+
+procedure TListTipoServico.CreateFieldsDataSet;
+begin
+  FDataSet.FieldDefs.Add('id', ftInteger);
+  FDataSet.FieldDefs.Add('nome', ftString, 100);
+  FDataSet.FieldDefs.Add('taxa_entrega', ftFloat);
+  FDataSet.FieldDefs.Add('id_cidade', ftInteger);
+
+  FDataSet.CreateDataSet;
+
+  FDataSet.IndexFieldNames := 'id';
+end;
+
+function TListTipoServico.DataSet: TDataSet;
+begin
+  Result := FDataSet;
+end;
+
+destructor TListTipoServico.Destroy;
+begin
+  FList.Free;
+  FDataSet.DisposeOf;
+  inherited;
+end;
+
+class function TListTipoServico.New: iListTipoServico;
+begin
+  Result := Self.Create;
+end;
+
+function TListTipoServico.ObjectToJson(aObject: TTipoServico): TJSONObject;
+var
+  lObject : TTipoServico;
+begin
+  lObject := aObject;
+  Result := TJson.ObjectToJsonObject(lObject);
+end;
+
+function TListTipoServico.SetData(aJson: TJSONValue): iListTipoServico;
+var
+  lJsonArray : TJSONArray;
+begin
+  Result := nil;
+  FRecordCount := aJson.GetValue<Integer>('records');
+  if aJson.TryGetValue<TJSONArray>('data', lJsonArray) then begin
+    SetDataSet(lJsonArray);
+    SetList(lJsonArray);
+  end;
+end;
+
+function TListTipoServico.SetDataSet(aJson: TJSONArray): iListTipoServico;
+begin
+  FDataSet.DisableControls;
+  if FDataSet.FieldCount > 0 then
+    FDataSet.EmptyDataSet;
+
+  FDataSet.LoadFromJSON(aJson, False);
+
+  FDataSet.EnableControls;
+
+  FDataSet.Open;
+end;
+
+function TListTipoServico.SetList(aJson: TJSONArray): iListTipoServico;
+begin
+  FList.Clear;
+
+  for var I := 0 to AJson.Count -1 do
+    FList.Add(JsonToObject(aJson.Items[I] as TJSONObject));
+end;
+
+end.

@@ -1,0 +1,109 @@
+unit Rp.Model.Dao.Generic;
+
+interface
+
+uses
+  Datasnap.DBClient,
+  Data.DB,
+  RESTRequest4D,
+  Rp.Model.Rest,
+  Rp.Model.List.Generic,
+  System.Generics.Collections,
+  REST.Json,
+  System.SysUtils,
+  System.JSON;
+
+type
+  iDAOGeneric<T : class> = interface
+    ['{78FAD1A0-3E5F-4178-A8D1-F89EA93FEA79}']
+    function Find : TJSONValue; overload;
+    function Find (const aID : String ) : iDAOGeneric<T>; overload;
+    function Insert ( aObject : TJSONObject ) : Boolean;
+    function Update  : Boolean;
+    function Delete (const aID : String) : Boolean;
+  end;
+
+  TDAOGeneric<T : class, constructor> = class(TInterfacedObject, iDAOGeneric<T>)
+  private
+    FRequest : iRequest;
+
+  public
+    constructor Create ( aObject : TObject);
+    destructor Destroy; override;
+    class function New ( aObject : TObject) : iDAOGeneric<T>;
+
+    function Find : TJSONValue; overload;
+    function Find (const aID : String ) : iDAOGeneric<T>; overload;
+    function Insert ( aObject : TJSONObject) : Boolean;
+    function Update  : Boolean;
+    function Delete (const aID : String) : Boolean;
+  end;
+
+implementation
+
+{ TDAOGeneric<T> }
+
+constructor TDAOGeneric<T>.Create;
+begin
+  FRequest := ConnRequest;
+end;
+
+function TDAOGeneric<T>.Delete(const aID: String): Boolean;
+var
+  lResponse: IResponse;
+begin
+  Result := False;
+  lResponse := FRequest.ClearBody
+              .ResourceSuffix(aID)
+              .Delete;
+
+  Result := lResponse.StatusCode = 204;
+end;
+
+destructor TDAOGeneric<T>.Destroy;
+begin
+
+  inherited;
+end;
+
+function TDAOGeneric<T>.Find(const aID: String): iDAOGeneric<T>;
+begin
+
+end;
+
+function TDAOGeneric<T>.Find: TJSONValue;
+var
+  lResponse: IResponse;
+begin
+  lResponse := FRequest.ClearBody
+                 .ResourceSuffix(EmptyStr)
+                 .Get;
+
+  if lResponse.StatusCode = 200 then
+    Result := lResponse.JSONValue;
+end;
+
+function TDAOGeneric<T>.Insert( aObject : TJSONObject ) : Boolean;
+var
+  lResponse: IResponse;
+begin
+  Result := False;
+  lResponse := FRequest.ClearBody
+              .AddBody(aObject)
+              .ResourceSuffix(EmptyStr)
+              .Post;
+
+  Result := lResponse.StatusCode in [200,201,204];
+end;
+
+class function TDAOGeneric<T>.New( aObject : TObject): iDAOGeneric<T>;
+begin
+  Result := Self.Create( aObject );
+end;
+
+function TDAOGeneric<T>.Update: Boolean;
+begin
+
+end;
+
+end.

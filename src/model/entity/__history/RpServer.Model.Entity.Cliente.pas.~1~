@@ -1,0 +1,7 @@
+unit RpServer.Model.Entity.Cliente;
+
+interface
+
+implementation
+
+end.

@@ -1,0 +1,34 @@
+unit Rp.Model.Entity.Venda;
+
+interface
+
+type
+  TVenda = class
+  private
+    Fid: Int64;
+    FIdCliente: Int64;
+    FNomeCliente: string;
+    FDocCliente: string;
+    FFoneCliente: string;
+    FIdFuncionario: Int64;
+    FIdUsuario: Int64;
+    FDtaEmissao: TDateTime;
+    FVlrTotal: Currency;
+    procedure Setid(const Value: Int64);
+
+  public
+    property Id: Int64 read Fid write Fid;
+    property Id_cliente: Int64 read FIdCliente write FIdCliente;
+    property Nome_cliente: string read FNomeCliente write FNomeCliente;
+    property Doc_cliente: string read FDocCliente write FDocCliente;
+    property Fone_cliente: string read FFoneCliente write FFoneCliente;
+    property Id_funcionario: Int64 read FIdFuncionario write FIdFuncionario;
+    property Id_usuario: Int64 read FIdUsuario write FIdUsuario;
+    property Dta_emissao: TDateTime read FDtaEmissao write FDtaEmissao;
+    property Vlr_total: Currency read FVlrTotal write FVlrTotal;
+  end;
+
+implementation
+
+
+end.

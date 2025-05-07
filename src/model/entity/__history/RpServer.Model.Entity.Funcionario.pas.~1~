@@ -1,0 +1,7 @@
+unit RpServer.Model.Entity.Funcionario;
+
+interface
+
+implementation
+
+end.

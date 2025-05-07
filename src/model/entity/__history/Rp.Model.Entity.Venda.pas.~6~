@@ -1,0 +1,40 @@
+unit Rp.Model.Entity.Venda;
+
+interface
+
+type
+  TVenda = class
+  private
+    Fid: Int64;
+    FId_Cliente: Int64;
+    FNome_Cliente: string;
+    FDoc_Cliente: string;
+    FFone_Cliente: string;
+    FId_Funcionario: Int64;
+    FId_Usuario: Int64;
+    FDta_Emissao: TDateTime;
+    FVlrTotal: Currency;
+    FVlr_desc: Currency;
+    FVlr_SubTotal: Currency;
+    FVlr_Acres: Currency;
+    FVlr_Frete: Currency;
+
+  public
+    property Id: Int64 read Fid write Fid;
+    property Id_cliente: Int64 read FId_Cliente write FId_Cliente;
+    property Nome_cliente: string read FNome_Cliente write FNome_Cliente;
+    property Doc_cliente: string read FDoc_Cliente write FDoc_Cliente;
+    property Fone_cliente: string read FFone_Cliente write FFone_Cliente;
+    property Id_funcionario: Int64 read FId_Funcionario write FId_Funcionario;
+    property Id_usuario: Int64 read FId_Usuario write FId_Usuario;
+    property Dta_emissao: TDateTime read FDta_Emissao write FDta_Emissao;
+    property Vlr_SubTotal: Currency read FVlr_SubTotal write FVlr_SubTotal;
+    property Vlr_Frete: Currency read FVlr_Frete write FVlr_Frete;
+    property Vlr_Desc: Currency read FVlr_desc write FVlr_desc;
+    property Vlr_Acres: Currency read FVlr_Acres write FVlr_Acres;
+    property Vlr_total: Currency read FVlrTotal write FVlrTotal;
+  end;
+
+implementation
+
+end.

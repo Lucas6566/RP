@@ -1,0 +1,141 @@
+unit Rp.Model.List.Cidade;
+
+interface
+
+uses
+  Rp.Model.Entity.Cidade,
+  System.Generics.Collections,
+  System.JSON,
+  REST.JSON,
+  Data.DB,
+
+  FireDAC.Stan.Intf,
+  FireDAC.Stan.Option,
+  FireDAC.Stan.Param,
+  FireDAC.Stan.Error,
+  FireDAC.DatS,
+  FireDAC.Phys.Intf,
+  FireDAC.DApt.Intf,
+  FireDAC.Comp.DataSet,
+  FireDAC.Comp.Client,
+
+  DataSet.Serialize;
+
+type
+  iListCidade = Interface
+    ['{83928C9F-2286-4132-BDC6-83BFE9EC608C}']
+    function GeneratorJson( aObject : TCidade ) : TJSONObject;
+
+    function SetData(aJson: TJSONValue): iListCidade;
+    function SetList(aJson: TJSONArray): iListCidade;
+    function SetDataSet(aJson: TJSONArray): iListCidade;
+
+    function DataSet: TDataSet;
+  End;
+
+
+  TListCidade = Class(TInterfacedObject, iListCidade)
+  private
+    FList : TObjectList<TCidade>;
+    FDataSet : TFDMemTable;
+    FRecordCount : Integer;
+
+    function ObjectToJson( aObjectList : TObjectList<TCidade> ) : TJSONObject;
+    function JsonToObject(aJson: TJSONObject): TCidade;
+  public
+    constructor Create;
+    destructor Destroy; override;
+    class function New : iListCidade;
+
+  public
+    function GeneratorJson( aObject : TCidade ) : TJSONObject;
+
+    function SetData(aJson: TJSONValue): iListCidade;
+    function SetList(aJson: TJSONArray): iListCidade;
+    function SetDataSet(aJson: TJSONArray): iListCidade;
+
+    function DataSet: TDataSet;
+  End;
+
+implementation
+
+{ TListCidade }
+
+function TListCidade.GeneratorJson( aObject : TCidade ) : TJSONObject;
+var
+  lListAdd : TObjectList<TCidade>;
+begin
+  lListAdd := TObjectList<TCidade>.Create;
+  lListAdd.Add(aObject);
+
+  Result := ObjectToJson(lListAdd);
+end;
+
+function TListCidade.JsonToObject(aJson: TJSONObject): TCidade;
+begin
+  Result := TJson.JsonToObject<TCidade>(aJson, []);
+end;
+
+constructor TListCidade.Create;
+begin
+  FList := TObjectList<TCidade>.Create;
+  FDataSet := TFDMemTable.Create(nil);
+end;
+
+function TListCidade.DataSet: TDataSet;
+begin
+  Result := FDataSet;
+end;
+
+destructor TListCidade.Destroy;
+begin
+  FList.Free;
+  FDataSet.DisposeOf;
+  inherited;
+end;
+
+class function TListCidade.New: iListCidade;
+begin
+  Result := Self.Create;
+end;
+
+function TListCidade.ObjectToJson( aObjectList : TObjectList<TCidade> ): TJSONObject;
+var
+  lJsonArray: TJSONArray;
+  lJson : TJSONObject;
+begin
+  lJson := TJson.ObjectToJsonObject(aObjectList);
+  lJsonArray := lJson.GetValue<TJSONArray>('listHelper');
+  Result := (lJsonArray.Get(0) as TJSONObject);
+end;
+
+function TListCidade.SetData(aJson: TJSONValue): iListCidade;
+var
+  lJsonArray : TJSONArray;
+begin
+  Result := nil;
+  FRecordCount := aJson.GetValue<Integer>('records');
+  lJsonArray := aJson.GetValue<TJSONArray>('data');
+
+  SetDataSet(lJsonArray);
+  SetList(lJsonArray);
+end;
+
+function TListCidade.SetDataSet(aJson: TJSONArray): iListCidade;
+begin
+  if not Assigned(FDataSet) then
+    FDataSet.EmptyDataSet;
+  FDataSet.LoadFromJSON(aJson, False);
+
+  FDataSet.Open;
+end;
+
+function TListCidade.SetList(aJson: TJSONArray): iListCidade;
+begin
+  FList.Clear;
+
+  for var I := 0 to Pred(aJson.Size) do
+    FList.Add(JsonToObject(aJson.Get(I) as TJSONObject));
+end;
+
+end.

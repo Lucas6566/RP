@@ -1,0 +1,24 @@
+unit Rp.Model.Entity.Servico;
+
+interface
+
+type
+  TServico = class
+  private
+    FId: Int64;
+    FDescricao: String;
+    FIdTipoServico: Int64;
+    FVlrVenda: Currency;
+
+  public
+    property Id: Int64 read FId write FId;
+    property Descricao: String read FDescricao write FDescricao;
+    property VlrVenda: Currency read FVlrVenda write FVlrVenda;
+    property IdTipoServico: Int64 read FIdTipoServico write FIdTipoServico;
+  end;
+
+implementation
+
+{ TServico }
+
+end.

@@ -1,0 +1,32 @@
+unit Rp.Model.Entity.VendaServico;
+
+interface
+
+type
+  TVendaServico = class
+  private
+    Fid: Int64;
+    FIdVenda: Int64;
+    FIdServico: Int64;
+    FQtdServico: Float;
+    FVlrUnitario: Currency;
+    FVlrTotal: Currency;
+    FDescrServico: String;
+    FVlrDesc: Currency;
+    FVlrAcres: Currency;
+	
+  public
+    property Id: Int64 read Fid write Fid;
+    property Id_venda: Int64 read FIdVenda write FIdVenda;
+    property Id_servico: Int64 read FIdServico write FIdServico;
+    property DescrServico: String read FDescrServico write FDescrServico;
+    property Qtd_servico: Float read FQtdServico write FQtdServico;
+    property Vlr_unitario: Currency read FVlrUnitario write FVlrUnitario;
+    property Vlr_Desc: Currency read FVlrDesc write FVlrDesc;
+    property Vlr_Acres: Currency read FVlrAcres write FVlrAcres;
+    property Vlr_total: Currency read FVlrTotal write FVlrTotal;
+  end;
+
+implementation
+
+end.

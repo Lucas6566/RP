@@ -1,0 +1,206 @@
+unit Rp.Model.List.Venda;
+
+interface
+
+uses
+  Rp.Model.Entity.Venda,
+  System.Generics.Collections,
+  System.JSON,
+  REST.JSON,
+  Data.DB,
+
+  FireDAC.Stan.Intf,
+  FireDAC.Stan.Option,
+  FireDAC.Stan.Param,
+  FireDAC.Stan.Error,
+  FireDAC.DatS,
+  FireDAC.Phys.Intf,
+  FireDAC.DApt.Intf,
+  FireDAC.Comp.DataSet,
+  FireDAC.Comp.Client,
+
+  DataSet.Serialize;
+
+type
+  iListVenda = Interface
+    ['{83928C9F-2286-4132-BDC6-83BFE9EC608C}']
+    function GeneratorJson( aObject : TVenda ) : TJSONObject;
+    function GetJson : TJSONObject;
+
+    function SetData(aJson: TJSONValue): iListVenda;
+    function SetList(aJson: TJSONArray): iListVenda;
+    function SetDataSet(aJson: TJSONArray): iListVenda;
+
+    function LocalizaList: TVenda;
+
+    function DataSet: TDataSet;
+    function LastItem : TVenda;
+  End;
+
+
+  TListVenda = Class(TInterfacedObject, iListVenda)
+  private
+    FList : TObjectList<TVenda>;
+    FDataSet : TFDMemTable;
+    FRecordCount : Integer;
+
+    procedure CreateFieldsDataSet;
+    function ObjectToJson( aObject : TVenda ) : TJSONObject;
+    function JsonToObject(aJson: TJSONObject): TVenda;
+  public
+    constructor Create;
+    destructor Destroy; override;
+    class function New : iListVenda;
+
+  public
+    function GeneratorJson( aObject : TVenda ) : TJSONObject;
+    function GetJson : TJSONObject;
+
+    function SetData(aJson: TJSONValue): iListVenda;
+    function SetList(aJson: TJSONArray): iListVenda;
+    function SetDataSet(aJson: TJSONArray): iListVenda;
+
+    function LocalizaList: TVenda;
+
+    function DataSet: TDataSet;
+    function LastItem : TVenda;
+  End;
+
+implementation
+
+{ TListVenda }
+
+function TListVenda.GeneratorJson( aObject : TVenda ) : TJSONObject;
+begin
+  Result := ObjectToJson(aObject);
+end;
+
+function TListVenda.GetJson: TJSONObject;
+begin
+  Result := nil;
+  for var I := 0 to FList.Count-1 do
+  begin
+    if FList.Items[I].id = FDataSet.FieldByName('id').AsInteger then
+    begin
+      Result := ObjectToJson(FList.Items[I]);
+      Break;
+    end;
+  end;
+end;
+
+function TListVenda.JsonToObject(aJson: TJSONObject): TVenda;
+begin
+  Result := TJson.JsonToObject<TVenda>(aJson, [joDateFormatUnix]);
+end;
+
+function TListVenda.LastItem: TVenda;
+begin
+  Result := FList.Last;
+end;
+
+function TListVenda.LocalizaList: TVenda;
+begin
+  Result := nil;
+  for var I := 0 to FList.Count-1 do
+  begin
+    if FList.Items[I].id = FDataSet.FieldByName('id').AsInteger then begin
+      Result := FList.Items[I];
+      break;
+    end;
+  end;
+end;
+
+constructor TListVenda.Create;
+begin
+  TDataSetSerializeConfig.GetInstance.DateTimeIsISO8601 := False;
+  TDataSetSerializeConfig.GetInstance.Export.FormatDateTime := 'yyyy-mm-dd hh:nn:ss';
+  FList := TObjectList<TVenda>.Create;
+  FDataSet := TFDMemTable.Create(nil);
+  CreateFieldsDataSet;
+end;
+
+procedure TListVenda.CreateFieldsDataSet;
+begin
+  FDataSet.FieldDefs.Add('id', ftInteger);
+  FDataSet.FieldDefs.Add('id_cliente ', ftInteger);
+  FDataSet.FieldDefs.Add('nome_cliente', ftString, 100);
+  FDataSet.FieldDefs.Add('doc_cliente', ftString, 14);
+  FDataSet.FieldDefs.Add('fone_cliente', ftString, 20);
+  FDataSet.FieldDefs.Add('id_usuario ', ftInteger);
+  FDataSet.FieldDefs.Add('dta_emissao', ftDateTime);
+  FDataSet.FieldDefs.Add('vlr_subTotal', ftString);
+  FDataSet.FieldDefs.Add('vlr_frete', ftCurrency);
+  FDataSet.FieldDefs.Add('vlr_desc', ftCurrency);
+  FDataSet.FieldDefs.Add('vlr_acres', ftCurrency);
+  FDataSet.FieldDefs.Add('vlr_total', ftCurrency);
+
+  FDataSet.CreateDataSet;
+
+  FDataSet.IndexFieldNames := 'id';
+end;
+
+function TListVenda.DataSet: TDataSet;
+begin
+  Result := FDataSet;
+end;
+
+destructor TListVenda.Destroy;
+begin
+  FList.Free;
+  FDataSet.DisposeOf;
+  inherited;
+end;
+
+class function TListVenda.New: iListVenda;
+begin
+  Result := Self.Create;
+end;
+
+function TListVenda.ObjectToJson(aObject: TVenda): TJSONObject;
+var
+  lObject : TVenda;
+begin
+  lObject := aObject;
+  Result := TJson.ObjectToJsonObject(lObject);
+end;
+
+function TListVenda.SetData(aJson: TJSONValue): iListVenda;
+var
+  lJsonArray : TJSONArray;
+begin
+  Result := nil;
+
+  aJson.TryGetValue<Integer>('records', FRecordCount);
+  aJson.TryGetValue<TJSONArray>('data', lJsonArray);
+
+  if lJsonArray = nil then
+    lJsonArray := TJSONArray.Create(aJson);
+
+  if lJsonArray.Count > 0 then begin
+    SetDataSet(lJsonArray);
+    SetList(lJsonArray);
+  end;
+end;
+
+function TListVenda.SetDataSet(aJson: TJSONArray): iListVenda;
+begin
+  FDataSet.DisableControls;
+  if FDataSet.FieldCount > 0 then
+    FDataSet.EmptyDataSet;
+
+  FDataSet.LoadFromJSON(aJson, False);
+
+  FDataSet.EnableControls;
+
+  FDataSet.Open;
+end;
+
+function TListVenda.SetList(aJson: TJSONArray): iListVenda;
+begin
+  FList.Clear;
+
+  for var I := 0 to AJson.Count -1 do
+    FList.Add(JsonToObject(aJson.Items[I] as TJSONObject));
+end;
+
+end.

@@ -1,0 +1,26 @@
+unit Rp.Model.Entity.VendaParcela;
+
+interface
+
+type
+  TVendaParcela = class
+  private
+    Fid: Int64;
+    FIdVenda: Int64;
+    FIdFormaPagamento: Int64;
+    FVlrAPagar: Currency;
+    FVlrPago: Currency;
+    FidSeg: Int64;
+
+  public
+    property Id: Int64 read Fid write Fid;
+    property Id_Seg: Int64 read FidSeg write FidSeg;
+    property Id_venda: Int64 read FIdVenda write FIdVenda;
+    property Id_forma_pagamento: Int64 read FIdFormaPagamento write FIdFormaPagamento;
+    property Vlr_pago: Currency read FVlrPago write FVlrPago;
+    property Vlr_apagar: Currency read FVlrAPagar write FVlrAPagar;
+  end;
+
+implementation
+
+end.

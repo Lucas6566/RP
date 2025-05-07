@@ -1,0 +1,30 @@
+unit Rp.Model.List.Generic;
+
+interface
+
+uses
+  System.Generics.Collections, System.JSON;
+
+type
+  TListGeneric<T : class, constructor> = class
+  private
+    FList : TObjectList<T>;
+
+  public
+    //function Find : TObjectList<T>;
+    function ObjectJson : TJSONObject;
+  end;
+
+
+
+
+implementation
+
+{ TListGeneric<T> }
+
+function TListGeneric<T>.ObjectJson: TJSONObject;
+begin
+  //
+end;
+
+end.

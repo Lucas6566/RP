@@ -1,0 +1,182 @@
+unit Rp.Model.List.Funcionario;
+
+interface
+
+uses
+  Rp.Model.Entity.Funcionario,
+  System.Generics.Collections,
+  System.JSON,
+  REST.JSON,
+  Data.DB,
+
+  FireDAC.Stan.Intf,
+  FireDAC.Stan.Option,
+  FireDAC.Stan.Param,
+  FireDAC.Stan.Error,
+  FireDAC.DatS,
+  FireDAC.Phys.Intf,
+  FireDAC.DApt.Intf,
+  FireDAC.Comp.DataSet,
+  FireDAC.Comp.Client,
+
+  DataSet.Serialize;
+
+type
+  iListFuncionario = Interface
+    ['{83928C9F-2286-4132-BDC6-83BFE9EC608C}']
+    function GeneratorJson( aObject : TFuncionario ) : TJSONObject;
+    function GetJson : TJSONObject;
+
+    function SetData(aJson: TJSONValue): iListFuncionario;
+    function SetList(aJson: TJSONArray): iListFuncionario;
+    function SetDataSet(aJson: TJSONArray): iListFuncionario;
+
+    function LocalizaList: TFuncionario;
+
+    function DataSet: TDataSet;
+  End;
+
+
+  TListFuncionario = Class(TInterfacedObject, iListFuncionario)
+  private
+    FList : TObjectList<TFuncionario>;
+    FDataSet : TFDMemTable;
+    FRecordCount : Integer;
+
+    procedure CreateFieldsDataSet;
+    function ObjectToJson( aObject : TFuncionario ) : TJSONObject;
+    function JsonToObject(aJson: TJSONObject): TFuncionario;
+  public
+    constructor Create;
+    destructor Destroy; override;
+    class function New : iListFuncionario;
+
+  public
+    function GeneratorJson( aObject : TFuncionario ) : TJSONObject;
+    function GetJson : TJSONObject;
+
+    function SetData(aJson: TJSONValue): iListFuncionario;
+    function SetList(aJson: TJSONArray): iListFuncionario;
+    function SetDataSet(aJson: TJSONArray): iListFuncionario;
+
+    function LocalizaList: TFuncionario;
+
+    function DataSet: TDataSet;
+  End;
+
+implementation
+
+{ TListFuncionario }
+
+function TListFuncionario.GeneratorJson( aObject : TFuncionario ) : TJSONObject;
+begin
+  Result := ObjectToJson(aObject);
+end;
+
+function TListFuncionario.GetJson: TJSONObject;
+begin
+  Result := nil;
+  for var I := 0 to FList.Count-1 do
+  begin
+    if FList.Items[I].id = FDataSet.FieldByName('id').AsInteger then
+    begin
+      Result := ObjectToJson(FList.Items[I]);
+      Break;
+    end;
+  end;
+end;
+
+function TListFuncionario.JsonToObject(aJson: TJSONObject): TFuncionario;
+begin
+  Result := TJson.JsonToObject<TFuncionario>(aJson, []);
+end;
+
+function TListFuncionario.LocalizaList: TFuncionario;
+begin
+  Result := nil;
+  for var I := 0 to FList.Count-1 do
+  begin
+    if FList.Items[I].id = FDataSet.FieldByName('id').AsInteger then begin
+      Result := FList.Items[I];
+      break;
+    end;
+  end;
+end;
+
+constructor TListFuncionario.Create;
+begin
+  FList := TObjectList<TFuncionario>.Create;
+  FDataSet := TFDMemTable.Create(nil);
+  CreateFieldsDataSet;
+end;
+
+procedure TListFuncionario.CreateFieldsDataSet;
+begin
+  FDataSet.FieldDefs.Add('id', ftInteger);
+  FDataSet.FieldDefs.Add('nome', ftString, 100);
+  FDataSet.FieldDefs.Add('funcionario', ftString, 100);
+
+  FDataSet.CreateDataSet;
+
+  FDataSet.IndexFieldNames := 'id';
+end;
+
+function TListFuncionario.DataSet: TDataSet;
+begin
+  Result := FDataSet;
+end;
+
+destructor TListFuncionario.Destroy;
+begin
+  FList.Free;
+  FDataSet.DisposeOf;
+  inherited;
+end;
+
+class function TListFuncionario.New: iListFuncionario;
+begin
+  Result := Self.Create;
+end;
+
+function TListFuncionario.ObjectToJson(aObject: TFuncionario): TJSONObject;
+var
+  lObject : TFuncionario;
+begin
+  lObject := aObject;
+  Result := TJson.ObjectToJsonObject(lObject);
+end;
+
+function TListFuncionario.SetData(aJson: TJSONValue): iListFuncionario;
+var
+  lJsonArray : TJSONArray;
+begin
+  Result := nil;
+  FRecordCount := aJson.GetValue<Integer>('records');
+  if aJson.TryGetValue<TJSONArray>('data', lJsonArray) then begin
+    SetDataSet(lJsonArray);
+    SetList(lJsonArray);
+  end;
+end;
+
+function TListFuncionario.SetDataSet(aJson: TJSONArray): iListFuncionario;
+begin
+  FDataSet.DisableControls;
+  if FDataSet.FieldCount > 0 then
+    FDataSet.EmptyDataSet;
+
+  FDataSet.LoadFromJSON(aJson, False);
+
+  FDataSet.EnableControls;
+
+  FDataSet.Open;
+end;
+
+function TListFuncionario.SetList(aJson: TJSONArray): iListFuncionario;
+begin
+  FList.Clear;
+
+  for var I := 0 to AJson.Count -1 do
+    FList.Add(JsonToObject(aJson.Items[I] as TJSONObject));
+end;
+
+end.

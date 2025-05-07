@@ -1,0 +1,23 @@
+unit Rp.Model.List.Generic;
+
+interface
+
+uses
+  System.Generics.Collections;
+
+type
+  TListGeneric<T : class, constructor> = class
+  private
+    FList : TObjectList<T>;
+
+  public
+    function Find : TObjectList<T>;
+
+  end;
+
+
+
+
+implementation
+
+end.

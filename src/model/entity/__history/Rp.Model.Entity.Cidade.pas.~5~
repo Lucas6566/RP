@@ -1,0 +1,40 @@
+unit Rp.Model.Entity.Cidade;
+
+interface
+
+type
+  TCidade = class(TObject)
+  private
+    FId: Int64;
+    FUf: String;
+    FNome: String;
+
+  public
+    constructor Create;
+    destructor Destroy; override;
+
+  published
+    property id: Int64 read FId write FId;
+    property nome: String read FNome write FNome;
+    property uf: String read FUf write FUf;
+  end;
+
+implementation
+
+{ TCidade }
+
+
+{ TCidade }
+
+constructor TCidade.Create;
+begin
+
+end;
+
+destructor TCidade.Destroy;
+begin
+
+  inherited;
+end;
+
+end.

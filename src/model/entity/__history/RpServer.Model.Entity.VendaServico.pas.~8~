@@ -1,0 +1,88 @@
+unit RpServer.Model.Entity.VendaServico;
+
+interface
+
+uses
+  SimpleAttributes;
+
+type
+  [Tabela('venda_servico')]
+  TVendaServico = class
+  private
+    Fid: Int64;
+    FIdVenda: Int64;
+    FIdServico: Int64;
+    FQtdServico: Integer;
+    FVlrUnitario: Currency;
+    FVlrTotal: Currency;
+
+    procedure SetId(const Value: Int64);
+    procedure SetId_venda(const Value: Int64);
+    procedure SetId_servico(const Value: Int64);
+    procedure SetQtd_servico(const Value: Integer);
+    procedure SetVlr_unitario(const Value: Currency);
+    procedure SetVlr_total(const Value: Currency);
+
+  public
+    constructor Create;
+    destructor Destroy; override;
+
+  public
+    [Campo('id'), PK, AutoInc]
+    property Id: Int64 read Fid write Setid;
+    [Campo('id_venda'), FK]
+    property Id_venda: Int64 read FIdVenda write Setid_venda;
+    [Campo('Id_servico'), FK]
+    property Id_servico: Int64 read FIdServico write Setid_servico;
+    [Campo('Qtd_servico')]
+    property Qtd_servico: Integer read FQtdServico write Setqtd_servico;
+    [Campo('Vlr_unitario')]
+    property Vlr_unitario: Currency read FVlrUnitario write Setvlr_unitario;
+    [Campo('Vlr_total')]
+    property Vlr_total: Currency read FVlrTotal write Setvlr_total;
+  end;
+
+implementation
+
+constructor TVendaServico.Create;
+begin
+
+end;
+
+destructor TVendaServico.Destroy;
+begin
+
+  inherited;
+end;
+
+procedure TVendaServico.Setid(const Value: Int64);
+begin
+  Fid := Value;
+end;
+
+procedure TVendaServico.Setid_venda(const Value: Int64);
+begin
+  FIdVenda := Value;
+end;
+
+procedure TVendaServico.Setid_servico(const Value: Int64);
+begin
+  FIdServico := Value;
+end;
+
+procedure TVendaServico.Setqtd_servico(const Value: Integer);
+begin
+  FQtdServico := Value;
+end;
+
+procedure TVendaServico.Setvlr_unitario(const Value: Currency);
+begin
+  FVlrUnitario := Value;
+end;
+
+procedure TVendaServico.Setvlr_total(const Value: Currency);
+begin
+  FVlrTotal := Value;
+end;
+
+end.

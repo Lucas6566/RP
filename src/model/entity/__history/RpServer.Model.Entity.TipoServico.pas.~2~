@@ -1,0 +1,53 @@
+unit RpServer.Model.Entity.TipoServico;
+
+interface
+
+uses
+  SimpleAttributes;
+
+type
+  [Tabela('tipo_servico')]
+  TTipoServico = class
+  private
+    FId: Int64;
+    FNome: String;
+    procedure SetId(const aValue: Int64);
+    procedure SetNome(const aValue: String);
+
+  public
+    constructor Create;
+    destructor Destroy; override;
+
+  public
+    [Campo('id'), PK, AutoInc]
+    property id: Int64 read FId write SetId;
+    [Campo('descricao')]
+    property nome: String read FNome write SetNome;
+  end;
+
+implementation
+
+{ TTipoServico }
+
+constructor TTipoServico.Create;
+begin
+
+end;
+
+destructor TTipoServico.Destroy;
+begin
+
+  inherited;
+end;
+
+procedure TTipoServico.SetId(const aValue: Int64);
+begin
+  FId := aValue;
+end;
+
+procedure TTipoServico.SetNome(const aValue: String);
+begin
+  FNome := aValue;
+end;
+
+end.

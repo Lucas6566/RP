@@ -1,0 +1,48 @@
+unit Rp.Model.Entity.Bairro;
+
+interface
+
+type
+  TBairro = class(TObject)
+  private
+    FId: Int64;
+    FNome: String;
+    FTaxa_entrega: Currency;
+    FId_cidade: Int64;
+    procedure SetId(const aValue: Int64);
+    procedure SetNome(const aValue: String);
+    procedure SetTaxa_entrega(const Value: Currency);
+    procedure SetId_cidade(const aValue: Int64);
+
+  public
+    property id: Int64 read FId write SetId;
+    property nome: String read FNome write SetNome;
+    property Taxa_entrega: Currency read FTaxa_entrega write SetTaxa_entrega;
+    property Id_cidade: Int64 read FId_cidade write SetId_cidade;
+  end;
+
+implementation
+
+{ TBairro }
+
+procedure TBairro.SetId(const aValue: Int64);
+begin
+  FId := aValue;
+end;
+
+procedure TBairro.SetId_cidade(const aValue: Int64);
+begin
+  FId_cidade := aValue;
+end;
+
+procedure TBairro.SetNome(const aValue: String);
+begin
+  FNome := aValue;
+end;
+
+procedure TBairro.SetTaxa_entrega(const Value: Currency);
+begin
+  FTaxa_entrega := Value;
+end;
+
+end.

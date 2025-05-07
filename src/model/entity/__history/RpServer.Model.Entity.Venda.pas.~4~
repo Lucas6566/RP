@@ -1,0 +1,86 @@
+unit RpServer.Model.Entity.Venda;
+
+interface
+
+type
+  TVenda = class
+  private
+    Fid: Int64;
+    FIdCliente: Int64;
+    FNomeCliente: string;
+    FDocCliente: string;
+    FFoneCliente: string;
+    FIdFuncionario: Int64;
+    FIdUsuario: Int64;
+    FDtaEmissao: TDateTime;
+    FVlrTotal: Currency;
+
+    procedure Setid(const Value: Int64);
+    procedure Setid_cliente(const Value: Int64);
+    procedure Setnome_cliente(const Value: string);
+    procedure Setdoc_cliente(const Value: string);
+    procedure Setfone_cliente(const Value: string);
+    procedure Setid_funcionario(const Value: Int64);
+    procedure Setid_usuario(const Value: Int64);
+    procedure Setdta_emissao(const Value: TDateTime);
+    procedure Setvlr_total(const Value: Currency);
+  public
+    property Id: Int64 read Fid write Setid;
+    property Id_cliente: Int64 read FIdCliente write Setid_cliente;
+    property Nome_cliente: string read FNomeCliente write Setnome_cliente;
+    property Doc_cliente: string read FDocCliente write Setdoc_cliente;
+    property Fone_cliente: string read FFoneCliente write Setfone_cliente;
+    property Id_funcionario: Int64 read FIdFuncionario write Setid_funcionario;
+    property Id_usuario: Int64 read FIdUsuario write Setid_usuario;
+    property Dta_emissao: TDateTime read FDtaEmissao write Setdta_emissao;
+    property Vlr_total: Currency read FVlrTotal write Setvlr_total;
+  end;
+
+implementation
+
+procedure TVenda.Setid(const Value: Int64);
+begin
+  Fid := Value;
+end;
+
+procedure TVenda.Setid_cliente(const Value: Int64);
+begin
+  FIdCliente := Value;
+end;
+
+procedure TVenda.Setnome_cliente(const Value: string);
+begin
+  FNomeCliente := Value;
+end;
+
+procedure TVenda.Setdoc_cliente(const Value: string);
+begin
+  FDocCliente := Value;
+end;
+
+procedure TVenda.Setfone_cliente(const Value: string);
+begin
+  FFoneCliente := Value;
+end;
+
+procedure TVenda.Setid_funcionario(const Value: Int64);
+begin
+  FIdFuncionario := Value;
+end;
+
+procedure TVenda.Setid_usuario(const Value: Int64);
+begin
+  FIdUsuario := Value;
+end;
+
+procedure TVenda.Setdta_emissao(const Value: TDateTime);
+begin
+  FDtaEmissao := Value;
+end;
+
+procedure TVenda.Setvlr_total(const Value: Currency);
+begin
+  FVlrTotal := Value;
+end;
+
+end.

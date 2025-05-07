@@ -1,0 +1,65 @@
+unit RpServer.Model.Entity.Funcionario;
+
+interface
+
+uses
+  SimpleAttributes;
+
+type
+  [Tabela('Funcionario')]
+  TCidade = class
+  private
+    FId: Int64;
+    FNome: String;
+    FFuncao: String;
+    procedure SetId(const aValue: Int64);
+    procedure SetNome(const aValue: String);
+    procedure SetFuncao(const Value: String);
+    procedure SetUf(const aValue: String);
+
+  public
+    constructor Create;
+    destructor Destroy; override;
+
+  published
+    [Campo('id'), PK, AutoInc]
+    property id: Int64 read FId write SetId;
+    [Campo('nome')]
+    property nome: String read FNome write SetNome;
+    [Campo('funcao')]
+    property Funcao: String read FFuncao write SetFuncao;
+  end;
+
+implementation
+
+{ TFuncionario }
+
+constructor TCidade.Create;
+begin
+
+end;
+
+destructor TCidade.Destroy;
+begin
+
+  inherited;
+end;
+
+procedure TCidade.SetFuncao(const Value: String);
+begin
+  FFuncao := Value;
+end;
+
+procedure TCidade.SetId(const aValue: Int64);
+begin
+  FId := aValue;
+end;
+
+procedure TCidade.SetNome(const aValue: String);
+begin
+  FNome := aValue;
+end;
+
+end.
+
+end.

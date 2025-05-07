@@ -1,0 +1,91 @@
+unit RpServer.Model.Entity.VendaParcela;
+
+interface
+
+uses
+  SimpleAttributes;
+
+type
+  [Tabela('venda_parcela')]
+  TVendaParcela = class
+  private
+    Fid: Int64;
+    FIdVenda: Int64;
+    FIdFormaPagamento: Int64;
+    FVlrDesc: Currency;
+    FVlrAcres: Currency;
+    FVlrSubtotal: Currency;
+    FVlrTotal: Currency;
+
+    procedure Setid(const Value: Int64);
+    procedure Setid_venda(const Value: Int64);
+    procedure Setid_forma_pagamento(const Value: Int64);
+    procedure Setvlr_desc(const Value: Currency);
+    procedure Setvlr_acres(const Value: Currency);
+    procedure Setvlr_subtotal(const Value: Currency);
+    procedure Setvlr_total(const Value: Currency);
+
+  public
+    constructor Create;
+    destructor Destroy; override;
+
+  public
+    [Campo('id'), PK, AutoInc]
+    property Id: Int64 read Fid write Setid;
+    property Id_venda: Int64 read FIdVenda write Setid_venda;
+    property Id_forma_pagamento: Int64 read FIdFormaPagamento write Setid_forma_pagamento;
+    property Vlr_desc: Currency read FVlrDesc write Setvlr_desc;
+    property Vlr_acres: Currency read FVlrAcres write Setvlr_acres;
+    property Vlr_subtotal: Currency read FVlrSubtotal write Setvlr_subtotal;
+    property Vlr_total: Currency read FVlrTotal write Setvlr_total;
+  end;
+
+implementation
+
+constructor TVendaParcela.Create;
+begin
+
+end;
+
+destructor TVendaParcela.Destroy;
+begin
+
+  inherited;
+end;
+
+procedure TVendaParcela.Setid(const Value: Int64);
+begin
+  Fid := Value;
+end;
+
+procedure TVendaParcela.Setid_venda(const Value: Int64);
+begin
+  FIdVenda := Value;
+end;
+
+procedure TVendaParcela.Setid_forma_pagamento(const Value: Int64);
+begin
+  FIdFormaPagamento := Value;
+end;
+
+procedure TVendaParcela.Setvlr_desc(const Value: Currency);
+begin
+  FVlrDesc := Value;
+end;
+
+procedure TVendaParcela.Setvlr_acres(const Value: Currency);
+begin
+  FVlrAcres := Value;
+end;
+
+procedure TVendaParcela.Setvlr_subtotal(const Value: Currency);
+begin
+  FVlrSubtotal := Value;
+end;
+
+procedure TVendaParcela.Setvlr_total(const Value: Currency);
+begin
+  FVlrTotal := Value;
+end;
+
+end.

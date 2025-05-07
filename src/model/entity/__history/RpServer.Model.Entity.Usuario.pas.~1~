@@ -1,0 +1,7 @@
+unit RpServer.Model.Entity.Usuario;
+
+interface
+
+implementation
+
+end.

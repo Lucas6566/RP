@@ -1,0 +1,7 @@
+unit RpServer.Model.Entity.VendaParcela;
+
+interface
+
+implementation
+
+end.

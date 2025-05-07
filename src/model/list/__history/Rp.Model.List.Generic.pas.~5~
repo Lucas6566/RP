@@ -1,0 +1,54 @@
+unit Rp.Model.List.Generic;
+
+interface
+
+uses
+  System.Generics.Collections, System.JSON;
+
+type
+  iListGeneric<T : class, constructor> = interface
+    ['{151B7AA2-73D2-4285-AA59-C2F607D3D740}']
+    function ObjectJson : TJSONObject;
+  end;
+
+  TListGeneric<T : class, constructor> = class(TInterfacedObject, iListGeneric<T>)
+  private
+    FList : TObjectList<T>;
+
+  public
+    constructor Create;
+    destructor Destroy; override;
+    class function New : iListGeneric<T>;
+
+    function ObjectJson : TJSONObject;
+  end;
+
+
+
+
+implementation
+
+{ TListGeneric<T> }
+
+constructor TListGeneric<T>.Create;
+begin
+
+end;
+
+destructor TListGeneric<T>.Destroy;
+begin
+
+  inherited;
+end;
+
+class function TListGeneric<T>.New: iListGeneric<T>;
+begin
+  Result := Self.Create;
+end;
+
+function TListGeneric<T>.ObjectJson: TJSONObject;
+begin
+  //
+end;
+
+end.
