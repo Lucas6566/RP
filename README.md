@@ -14,7 +14,7 @@ Tela de Clientes
 ![TelaCliente](https://github.com/user-attachments/assets/c1e212ca-a001-49dd-99e8-81fc3e0c11f3)
 
 Inclusão de Cliente
-![CadastroCliente](https://github.com/user-attachments/assets/d30f09d8-4c99-4adf-8268-33f8e32ac8bc)
+![FrmPrincipal 07_05_2025 20_33_47](https://github.com/user-attachments/assets/973bf9e1-eb4c-48e1-b195-d5426840e67b)
 
 Inclusão de Venda
 ![Venda](https://github.com/user-attachments/assets/473e8888-872b-4411-8c38-18951bd659b4)
@@ -22,7 +22,7 @@ Inclusão de Venda
 Inclusão de Venda com Serviços
 ![VendaComItens](https://github.com/user-attachments/assets/712a009c-5aad-4e89-a9e0-2e1503d2d0aa)
 
-Condição de Pagamento
+Condição de Pagamento 
 ![CondicaoPagamento](https://github.com/user-attachments/assets/0a649b80-a5ca-4f69-a051-2b9992654272)
 
 Tela de Vendas
