@@ -55,7 +55,8 @@ begin
   FEntidade := TVendaParcela.Create;
   FList := TListVendaParcela.New;
   FDAOGeneric := TDAOGeneric.New;
-  FDAOGeneric.Request(ConnRequest.Resource('vendaparcela'));
+  //FDAOGeneric.Request(ConnRequest.Resource('vendaparcela'));
+  FDAOGeneric.Request.Resource('vendaparcela');
 end;
 
 function TControllerVendaParcela.DataSource(

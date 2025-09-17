@@ -57,7 +57,8 @@ begin
   FList := TListTipoServico.New;
   FEntidade := FList.SetObject(TTipoServico.Create);
   FDAOGeneric := TDAOGeneric.New;
-  FDAOGeneric.Request(ConnRequest.Resource('tiposervico'));
+  //FDAOGeneric.Request(ConnRequest.Resource('tiposervico'));
+  FDAOGeneric.Request.Resource('tiposervico');
 end;
 
 function TControllerTipoServico.DataSource(

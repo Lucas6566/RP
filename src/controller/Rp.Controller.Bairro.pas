@@ -6,7 +6,7 @@ uses
   Data.DB,
   Rp.Model.Entity.Bairro,
   Rp.Model.Dao.Generic,
-  Rp.Model.List.Bairro, Rp.Model.Rest;
+  Rp.Model.List.Bairro, Rp.Model.Rest, Rp.Controller.Cidade;
 
 type
   iControllerBairro = interface
@@ -21,6 +21,8 @@ type
     function LocalizaEntidade : iControllerBairro;
 
     function Entidade : TBairro;
+
+    function Cidade : iControllerCidade;
   end;
 
   TControllerBairro = class(TInterfacedObject, iControllerBairro)
@@ -29,6 +31,7 @@ type
     FDAOGeneric : iDAOGeneric;
     FList : iListBairro;
     FDataSource : TDataSource;
+    FCidade : iControllerCidade;
 
   public
     constructor Create;
@@ -44,18 +47,27 @@ type
     function LocalizaEntidade : iControllerBairro;
 
     function Entidade : TBairro;
+
+    function Cidade : iControllerCidade;
   end;
 
 implementation
 
 { TControllerBairro }
 
+function TControllerBairro.Cidade: iControllerCidade;
+begin
+  if not Assigned(FCidade) then
+    FCidade := TControllerCidade.New;
+  Result := FCidade;
+end;
+
 constructor TControllerBairro.Create;
 begin
-  FEntidade := TBairro.Create;
   FList := TListBairro.New;
   FDAOGeneric := TDAOGeneric.New;
-  FDAOGeneric.Request(ConnRequest.Resource('bairro'));
+  //FDAOGeneric.Request(ConnRequest.Resource('bairro'));
+  FDAOGeneric.Request.Resource('bairro');
 end;
 
 function TControllerBairro.DataSource(
@@ -74,12 +86,13 @@ end;
 
 destructor TControllerBairro.Destroy;
 begin
-  FEntidade.Free;
   inherited;
 end;
 
 function TControllerBairro.Entidade: TBairro;
 begin
+  if not Assigned(FEntidade) then
+    FEntidade := TBairro.Create;
   Result := FEntidade;
 end;
 
@@ -92,6 +105,7 @@ end;
 function TControllerBairro.Find(const aID: String): iControllerBairro;
 begin
   Result := Self;
+  FEntidade := FList.SetData(FDAOGeneric.Find(aID));
 end;
 
 function TControllerBairro.Insert: iControllerBairro;

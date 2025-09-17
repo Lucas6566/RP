@@ -174,10 +174,8 @@
         </DCCReference>
         <DCCReference Include="src\model\entity\Rp.Model.Entity.FormaPagamento.pas"/>
         <DCCReference Include="src\model\entity\Rp.Model.Entity.Servico.pas"/>
-        <DCCReference Include="src\model\entity\Rp.Model.Entity.TipoServico.pas"/>
         <DCCReference Include="src\model\list\Rp.Model.List.FormaPagamento.pas"/>
         <DCCReference Include="src\model\list\Rp.Model.List.Servico.pas"/>
-        <DCCReference Include="src\model\list\Rp.Model.List.TipoServico.pas"/>
         <DCCReference Include="src\view\pesquisa\Rp.View.Pesquisa.FormaPagamento.pas">
             <Form>FrmPesquisaFormaPagamento</Form>
             <FormType>dfm</FormType>
@@ -186,16 +184,8 @@
             <Form>FrmPesquisaServico</Form>
             <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="src\view\pesquisa\Rp.View.Pesquisa.TipoServico.pas">
-            <Form>FrmPesquisaTipoServico</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
         <DCCReference Include="src\view\cadastro\Rp.View.Cadastro.Servico.pas">
             <Form>FrmCadastroServico</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
-        <DCCReference Include="src\view\cadastro\Rp.View.Cadastro.TipoServico.pas">
-            <Form>FrmCadastroTipoServico</Form>
             <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="src\view\cadastro\Rp.View.Cadastro.FormaPagamento.pas">
@@ -204,7 +194,6 @@
         </DCCReference>
         <DCCReference Include="src\controller\Rp.Controller.FormaPagamento.pas"/>
         <DCCReference Include="src\controller\Rp.Controller.Servico.pas"/>
-        <DCCReference Include="src\controller\Rp.Controller.TipoServico.pas"/>
         <DCCReference Include="src\view\base\Rp.View.Base.Movimento.pas">
             <Form>FrmBaseMovimento</Form>
             <FormType>dfm</FormType>
@@ -230,18 +219,49 @@
             <Form>FrmMovimentoVendaPagamento</Form>
             <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="src\view\base\Rp.View.Base.Busca.pas">
-            <Form>FrmBaseBusca</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
         <DCCReference Include="src\view\busca\Rp.View.Busca.Cliente.pas">
             <Form>FrmBuscaCliente</Form>
             <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="src\view\busca\Rp.View.Busca.Servico.pas">
-            <Form>FrmBuscaServico</Form>
+        <DCCReference Include="src\view\base\Rp.View.Base.Busca.pas">
+            <Form>FrmBaseBusca</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="src\view\busca\Rp.View.Busca.Cidade.pas">
+            <Form>FrmBuscaCidade</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="src\view\busca\Rp.View.Busca.Bairro.pas">
+            <Form>FrmBuscaBairro</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="src\view\busca\Rp.View.Busca.Servico.pas"/>
+        <DCCReference Include="src\view\Rp.View.Login.pas">
+            <Form>FrmLogin</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="src\util\Rp.Util.Variables.pas"/>
+        <DCCReference Include="src\controller\Rp.Controller.Usuario.pas"/>
+        <DCCReference Include="src\model\entity\Rp.Model.Entity.Usuario.pas"/>
+        <DCCReference Include="src\model\list\Rp.Model.List.Usuario.pas"/>
+        <DCCReference Include="src\model\Rp.Model.Session.pas"/>
+        <DCCReference Include="src\controller\Rp.Controller.Login.pas"/>
+        <DCCReference Include="src\model\dao\Rp.Model.Dao.Login.pas"/>
+        <DCCReference Include="src\controller\Rp.Controller.MovimentoServico.pas"/>
+        <DCCReference Include="src\controller\Rp.Controller.Movimento.pas"/>
+        <DCCReference Include="src\model\entity\Rp.Model.Entity.Movimento.pas"/>
+        <DCCReference Include="src\model\entity\Rp.Model.Entity.MovimentoServico.pas"/>
+        <DCCReference Include="src\model\list\Rp.Model.List.Movimento.pas"/>
+        <DCCReference Include="src\model\list\Rp.Model.List.MovimentoServico.pas"/>
+        <DCCReference Include="src\view\movimento\Rp.View.Movimento.OrdemServico.pas">
+            <Form>FrmMovimentoOrdemServico</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="src\view\pesquisa\Rp.View.Pesquisa.OrdemServico.pas">
+            <Form>FrmPesquisaOrdemServico</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="src\model\Rp.Model.Request.pas"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

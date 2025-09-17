@@ -35,19 +35,14 @@ uses
   Rp.View.Cadastro.Funcionario in 'src\view\cadastro\Rp.View.Cadastro.Funcionario.pas' {FrmCadastroFuncionario},
   Rp.Model.Entity.FormaPagamento in 'src\model\entity\Rp.Model.Entity.FormaPagamento.pas',
   Rp.Model.Entity.Servico in 'src\model\entity\Rp.Model.Entity.Servico.pas',
-  Rp.Model.Entity.TipoServico in 'src\model\entity\Rp.Model.Entity.TipoServico.pas',
   Rp.Model.List.FormaPagamento in 'src\model\list\Rp.Model.List.FormaPagamento.pas',
   Rp.Model.List.Servico in 'src\model\list\Rp.Model.List.Servico.pas',
-  Rp.Model.List.TipoServico in 'src\model\list\Rp.Model.List.TipoServico.pas',
   Rp.View.Pesquisa.FormaPagamento in 'src\view\pesquisa\Rp.View.Pesquisa.FormaPagamento.pas' {FrmPesquisaFormaPagamento},
   Rp.View.Pesquisa.Servico in 'src\view\pesquisa\Rp.View.Pesquisa.Servico.pas' {FrmPesquisaServico},
-  Rp.View.Pesquisa.TipoServico in 'src\view\pesquisa\Rp.View.Pesquisa.TipoServico.pas' {FrmPesquisaTipoServico},
   Rp.View.Cadastro.Servico in 'src\view\cadastro\Rp.View.Cadastro.Servico.pas' {FrmCadastroServico},
-  Rp.View.Cadastro.TipoServico in 'src\view\cadastro\Rp.View.Cadastro.TipoServico.pas' {FrmCadastroTipoServico},
   Rp.View.Cadastro.FormaPagamento in 'src\view\cadastro\Rp.View.Cadastro.FormaPagamento.pas' {FrmCadastroFormaPagamento},
   Rp.Controller.FormaPagamento in 'src\controller\Rp.Controller.FormaPagamento.pas',
   Rp.Controller.Servico in 'src\controller\Rp.Controller.Servico.pas',
-  Rp.Controller.TipoServico in 'src\controller\Rp.Controller.TipoServico.pas',
   Rp.View.Base.Movimento in 'src\view\base\Rp.View.Base.Movimento.pas' {FrmBaseMovimento},
   Rp.View.Movimento.Venda in 'src\view\movimento\Rp.View.Movimento.Venda.pas' {FrmMovimentoVenda},
   Rp.View.Pesquisa.Venda in 'src\view\pesquisa\Rp.View.Pesquisa.Venda.pas' {FrmPesquisaVenda},
@@ -61,15 +56,35 @@ uses
   Rp.Model.List.VendaParcela in 'src\model\list\Rp.Model.List.VendaParcela.pas',
   Rp.Model.List.VendaServico in 'src\model\list\Rp.Model.List.VendaServico.pas',
   Rp.View.Movimento.VendaPagamento in 'src\view\movimento\Rp.View.Movimento.VendaPagamento.pas' {FrmMovimentoVendaPagamento},
-  Rp.View.Base.Busca in 'src\view\base\Rp.View.Base.Busca.pas' {FrmBaseBusca},
   Rp.View.Busca.Cliente in 'src\view\busca\Rp.View.Busca.Cliente.pas' {FrmBuscaCliente},
-  Rp.View.Busca.Servico in 'src\view\busca\Rp.View.Busca.Servico.pas' {FrmBuscaServico};
+  Rp.View.Base.Busca in 'src\view\base\Rp.View.Base.Busca.pas' {FrmBaseBusca},
+  Rp.View.Busca.Cidade in 'src\view\busca\Rp.View.Busca.Cidade.pas' {FrmBuscaCidade},
+  Rp.View.Busca.Bairro in 'src\view\busca\Rp.View.Busca.Bairro.pas' {FrmBuscaBairro},
+  Rp.View.Busca.Servico in 'src\view\busca\Rp.View.Busca.Servico.pas',
+  Rp.View.Login in 'src\view\Rp.View.Login.pas' {FrmLogin},
+  Rp.Util.Variables in 'src\util\Rp.Util.Variables.pas',
+  Rp.Controller.Usuario in 'src\controller\Rp.Controller.Usuario.pas',
+  Rp.Model.Entity.Usuario in 'src\model\entity\Rp.Model.Entity.Usuario.pas',
+  Rp.Model.List.Usuario in 'src\model\list\Rp.Model.List.Usuario.pas',
+  Rp.Model.Session in 'src\model\Rp.Model.Session.pas',
+  Rp.Controller.Login in 'src\controller\Rp.Controller.Login.pas',
+  Rp.Model.Dao.Login in 'src\model\dao\Rp.Model.Dao.Login.pas',
+  Rp.Controller.MovimentoServico in 'src\controller\Rp.Controller.MovimentoServico.pas',
+  Rp.Controller.Movimento in 'src\controller\Rp.Controller.Movimento.pas',
+  Rp.Model.Entity.Movimento in 'src\model\entity\Rp.Model.Entity.Movimento.pas',
+  Rp.Model.Entity.MovimentoServico in 'src\model\entity\Rp.Model.Entity.MovimentoServico.pas',
+  Rp.Model.List.Movimento in 'src\model\list\Rp.Model.List.Movimento.pas',
+  Rp.Model.List.MovimentoServico in 'src\model\list\Rp.Model.List.MovimentoServico.pas',
+  Rp.View.Movimento.OrdemServico in 'src\view\movimento\Rp.View.Movimento.OrdemServico.pas' {FrmMovimentoOrdemServico},
+  Rp.View.Pesquisa.OrdemServico in 'src\view\pesquisa\Rp.View.Pesquisa.OrdemServico.pas' {FrmPesquisaOrdemServico},
+  Rp.Model.Request in 'src\model\Rp.Model.Request.pas';
 
 {$R *.res}
 
 begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
+  ReportMemoryLeaksOnShutdown := True;
   Application.CreateForm(TFrmPrincipal, FrmPrincipal);
   Application.Run;
 end.

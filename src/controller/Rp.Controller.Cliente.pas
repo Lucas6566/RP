@@ -8,15 +8,15 @@ uses
   Rp.Model.Dao.Generic,
   Rp.Model.List.Cliente,
   Rp.Model.Rest,
-  System.SysUtils;
+  System.SysUtils, Rp.Controller.Bairro;
 
 type
   iControllerCliente = interface
     ['{4A217C3A-6515-4EEE-88E3-3E4973C19F8B}']
 
     function DataSource( aDataSource: TDataSource ): iControllerCliente;
-    function Find : iControllerCliente; overload;
-    function Find (const aID : String ) : iControllerCliente; overload;
+    function Find : Boolean; overload;
+    function Find (aField, aValue : String) : Boolean; overload;
     function Insert : iControllerCliente;
     function Delete : Boolean;
     function Update : iControllerCliente;
@@ -25,6 +25,8 @@ type
     function LocalizaEntidade( aId: Integer ) : iControllerCliente; overload;
 
     function Entidade : TCliente;
+
+    function Bairro : iControllerBairro;
   end;
 
   TControllerCliente = class(TInterfacedObject, iControllerCliente)
@@ -34,14 +36,15 @@ type
     FList : iListCliente;
     FDataSource : TDataSource;
 
+    FBairro : iControllerBairro;
   public
     constructor Create;
     destructor Destroy; override;
     class function New : iControllerCliente;
 
     function DataSource( aDataSource: TDataSource ): iControllerCliente;
-    function Find : iControllerCliente; overload;
-    function Find (const aID : String ) : iControllerCliente; overload;
+    function Find : Boolean; overload;
+    function Find (aField, aValue : String) : Boolean; overload;
     function Insert : iControllerCliente;
     function Delete : Boolean;
     function Update : iControllerCliente;
@@ -50,18 +53,26 @@ type
     function LocalizaEntidade( aId: Integer ) : iControllerCliente; overload;
 
     function Entidade : TCliente;
+
+    function Bairro : iControllerBairro;
   end;
 
 implementation
 
 { TControllerCliente }
 
+function TControllerCliente.Bairro: iControllerBairro;
+begin
+  if not Assigned(FBairro) then
+    FBairro := TControllerBairro.New;
+  Result := FBairro;
+end;
+
 constructor TControllerCliente.Create;
 begin
   FList := TListCliente.New;
-  FEntidade := FList.SetObject(TCliente.Create);
   FDAOGeneric := TDAOGeneric.New;
-  FDAOGeneric.Request(ConnRequest.Resource('cliente'));
+  FDAOGeneric.Request.Resource('cliente');
 end;
 
 function TControllerCliente.DataSource(
@@ -80,25 +91,25 @@ end;
 
 destructor TControllerCliente.Destroy;
 begin
-//  if Assigned(FEntidade) then
-//    FEntidade.Free;
   inherited;
 end;
 
 function TControllerCliente.Entidade: TCliente;
 begin
+  if not Assigned(FEntidade) then
+    FEntidade := FList.GetObject;
   Result := FEntidade;
 end;
 
-function TControllerCliente.Find: iControllerCliente;
+function TControllerCliente.Find(aField, aValue: String): Boolean;
 begin
-  Result := Self;
-  FList.SetData(FDAOGeneric.Find);
+  FDAOGeneric.Request.AddParam(aField, aValue);
+  Result := Find;
 end;
 
-function TControllerCliente.Find(const aID: String): iControllerCliente;
+function TControllerCliente.Find: Boolean;
 begin
-  Result := Self;
+  Result := FList.SetData(FDAOGeneric.Find);
 end;
 
 function TControllerCliente.Insert: iControllerCliente;

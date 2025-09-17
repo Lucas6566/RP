@@ -26,7 +26,7 @@ type
   TControllerCidade = class(TInterfacedObject, iControllerCidade)
   private
     FEntidade : TCidade;
-    FDAOGeneric : iDAOGeneric;//<TCidade>;
+    FDAOGeneric : iDAOGeneric;
     FList : iListCidade;
     FDataSource : TDataSource;
 
@@ -52,10 +52,9 @@ implementation
 
 constructor TControllerCidade.Create;
 begin
-  FEntidade := TCidade.Create;
   FList := TListCidade.New;
   FDAOGeneric := TDAOGeneric.New;
-  FDAOGeneric.Request(ConnRequest.Resource('cidade'));
+  FDAOGeneric.Request.Resource('cidade');
 end;
 
 function TControllerCidade.DataSource(
@@ -74,12 +73,15 @@ end;
 
 destructor TControllerCidade.Destroy;
 begin
-  FEntidade.Free;
+  if Assigned(FEntidade) then
+    FEntidade.Free;
   inherited;
 end;
 
 function TControllerCidade.Entidade: TCidade;
 begin
+  if not Assigned(FEntidade) then
+    FEntidade := TCidade.Create;
   Result := FEntidade;
 end;
 
@@ -92,6 +94,7 @@ end;
 function TControllerCidade.Find(const aID: String): iControllerCidade;
 begin
   Result := Self;
+  FEntidade := FList.SetData(FDAOGeneric.Find(aID));
 end;
 
 function TControllerCidade.Insert: iControllerCidade;

@@ -55,7 +55,9 @@ begin
   FEntidade := TFuncionario.Create;
   FList := TListFuncionario.New;
   FDAOGeneric := TDAOGeneric.New;
-  FDAOGeneric.Request(ConnRequest.Resource('funcionario'));
+  //FDAOGeneric.Request(ConnRequest.Resource('funcionario'));
+  FDAOGeneric.Request.Resource('funcionario');
+
 end;
 
 function TControllerFuncionario.DataSource(

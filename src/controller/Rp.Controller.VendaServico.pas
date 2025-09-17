@@ -77,7 +77,7 @@ constructor TControllerVendaServico.Create;
 begin
   FList := TListVendaServico.New;
   FDAOGeneric := TDAOGeneric.New;
-  FDAOGeneric.Request(ConnRequest.Resource('vendaservico'));
+  FDAOGeneric.Request.Resource('vendaservico');
 end;
 
 function TControllerVendaServico.CreateList: iControllerVendaServico;

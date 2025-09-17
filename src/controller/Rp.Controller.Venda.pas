@@ -67,10 +67,9 @@ uses
 
 constructor TControllerVenda.Create;
 begin
-  //FEntidade := TVenda.Create;
   FList := TListVenda.New;
   FDAOGeneric := TDAOGeneric.New;
-  FDAOGeneric.Request(ConnRequest.Resource('venda'));
+  FDAOGeneric.Request.Resource('venda');
 end;
 
 function TControllerVenda.DataSource(
@@ -89,7 +88,6 @@ end;
 
 destructor TControllerVenda.Destroy;
 begin
-  //FEntidade.Free;
   inherited;
 end;
 

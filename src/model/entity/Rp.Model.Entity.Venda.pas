@@ -6,7 +6,7 @@ type
   TVenda = class
   private
     Fid: Int64;
-    FId_cliente: Int64;
+    Fid_cliente: Int64;
     Fvlr_desc: Currency;
     Fvlr_frete: Currency;
     Fvlr_subtotal: Currency;

@@ -55,7 +55,8 @@ begin
   FEntidade := TFormaPagamento.Create;
   FList := TListFormaPagamento.New;
   FDAOGeneric := TDAOGeneric.New;
-  FDAOGeneric.Request(ConnRequest.Resource('formapagamento'));
+  //FDAOGeneric.Request(ConnRequest.Resource('formapagamento'));
+  FDAOGeneric.Request.Resource('formapagamento');
 end;
 
 function TControllerFormaPagamento.DataSource(
