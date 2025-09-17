@@ -1,5 +1,5 @@
 inherited FrmMovimentoVendaPagamento: TFrmMovimentoVendaPagamento
-  Caption = 'FrmMovimentoVendaPagamento'
+  Caption = 'Condi'#231#227'o de Pagamento'
   ClientHeight = 463
   ClientWidth = 608
   Position = poMainFormCenter
@@ -72,7 +72,7 @@ inherited FrmMovimentoVendaPagamento: TFrmMovimentoVendaPagamento
             TabOrder = 0
             LookAndFeel.NativeStyle = False
             LookAndFeel.SkinName = 'Black'
-            ExplicitLeft = 5
+            ExplicitHeight = 369
             object GridFormaDBCard: TcxGridDBCardView
               Navigator.Buttons.CustomButtons = <>
               ScrollbarAnnotations.CustomAnnotations = <>
@@ -438,11 +438,11 @@ inherited FrmMovimentoVendaPagamento: TFrmMovimentoVendaPagamento
     ExplicitTop = 427
     ExplicitWidth = 604
     inherited btnConfirm: TSpeedButton
-      Left = 476
+      Left = 498
       ExplicitLeft = 476
     end
     inherited btnCancel: TSpeedButton
-      Left = 344
+      Left = 388
       ExplicitLeft = 344
     end
   end

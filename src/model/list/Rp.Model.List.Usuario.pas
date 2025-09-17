@@ -1,9 +1,9 @@
-unit Rp.Model.List.Cliente;
+unit Rp.Model.List.Usuario;
 
 interface
 
 uses
-  Rp.Model.Entity.Cliente,
+  Rp.Model.Entity.Usuario,
   System.Generics.Collections,
   System.JSON,
   REST.JSON,
@@ -22,58 +22,58 @@ uses
   DataSet.Serialize;
 
 type
-  iListCliente = Interface
+  iListUsuario = Interface
     ['{83928C9F-2286-4132-BDC6-83BFE9EC608C}']
-    function GeneratorJson( aObject : TCliente ) : TJSONObject;
+    function GeneratorJson( aObject : TUsuario ) : TJSONObject;
     function GetJson : TJSONObject;
 
-    function SetData(aJson: TJSONValue): iListCliente;
-    function SetList(aJson: TJSONArray): iListCliente;
-    function SetDataSet(aJson: TJSONArray): iListCliente;
+    function SetData(aJson: TJSONValue): TUsuario;
+    function SetList(aJson: TJSONArray): TUsuario;
+    function SetDataSet(aJson: TJSONArray): iListUsuario;
 
-    function LocalizaList: TCliente;
+    function LocalizaList: TUsuario;
 
     function DataSet: TDataSet;
   End;
 
 
-  TListCliente = Class(TInterfacedObject, iListCliente)
+  TListUsuario = Class(TInterfacedObject, iListUsuario)
   private
-    FList : TObjectList<TCliente>;
+    FList : TObjectList<TUsuario>;
     FDataSet : TFDMemTable;
     FRecordCount : Integer;
 
     procedure CreateFieldsDataSet;
-    function ObjectToJson( aObject : TCliente ) : TJSONObject;
-    function JsonToObject(aJson: TJSONObject): TCliente;
+    function ObjectToJson( aObject : TUsuario ) : TJSONObject;
+    function JsonToObject(aJson: TJSONObject): TUsuario;
   public
     constructor Create;
     destructor Destroy; override;
-    class function New : iListCliente;
+    class function New : iListUsuario;
 
   public
-    function GeneratorJson( aObject : TCliente ) : TJSONObject;
+    function GeneratorJson( aObject : TUsuario ) : TJSONObject;
     function GetJson : TJSONObject;
 
-    function SetData(aJson: TJSONValue): iListCliente;
-    function SetList(aJson: TJSONArray): iListCliente;
-    function SetDataSet(aJson: TJSONArray): iListCliente;
+    function SetData(aJson: TJSONValue): TUsuario;
+    function SetList(aJson: TJSONArray): TUsuario;
+    function SetDataSet(aJson: TJSONArray): iListUsuario;
 
-    function LocalizaList: TCliente;
+    function LocalizaList: TUsuario;
 
     function DataSet: TDataSet;
   End;
 
 implementation
 
-{ TListCliente }
+{ TListUsuario }
 
-function TListCliente.GeneratorJson( aObject : TCliente ) : TJSONObject;
+function TListUsuario.GeneratorJson( aObject : TUsuario ) : TJSONObject;
 begin
   Result := ObjectToJson(aObject);
 end;
 
-function TListCliente.GetJson: TJSONObject;
+function TListUsuario.GetJson: TJSONObject;
 begin
   Result := nil;
   for var I := 0 to FList.Count-1 do
@@ -86,12 +86,12 @@ begin
   end;
 end;
 
-function TListCliente.JsonToObject(aJson: TJSONObject): TCliente;
+function TListUsuario.JsonToObject(aJson: TJSONObject): TUsuario;
 begin
-  Result := TJson.JsonToObject<TCliente>(aJson, []);
+  Result := TJson.JsonToObject<TUsuario>(aJson, []);
 end;
 
-function TListCliente.LocalizaList: TCliente;
+function TListUsuario.LocalizaList: TUsuario;
 begin
   Result := nil;
   for var I := 0 to FList.Count-1 do
@@ -103,14 +103,14 @@ begin
   end;
 end;
 
-constructor TListCliente.Create;
+constructor TListUsuario.Create;
 begin
-  FList := TObjectList<TCliente>.Create;
+  FList := TObjectList<TUsuario>.Create;
   FDataSet := TFDMemTable.Create(nil);
   CreateFieldsDataSet;
 end;
 
-procedure TListCliente.CreateFieldsDataSet;
+procedure TListUsuario.CreateFieldsDataSet;
 begin
   FDataSet.FieldDefs.Add('id', ftInteger);
   FDataSet.FieldDefs.Add('nome', ftString, 100);
@@ -122,32 +122,32 @@ begin
   FDataSet.IndexFieldNames := 'id';
 end;
 
-function TListCliente.DataSet: TDataSet;
+function TListUsuario.DataSet: TDataSet;
 begin
   Result := FDataSet;
 end;
 
-destructor TListCliente.Destroy;
+destructor TListUsuario.Destroy;
 begin
   FList.Free;
   FDataSet.DisposeOf;
   inherited;
 end;
 
-class function TListCliente.New: iListCliente;
+class function TListUsuario.New: iListUsuario;
 begin
   Result := Self.Create;
 end;
 
-function TListCliente.ObjectToJson(aObject: TCliente): TJSONObject;
+function TListUsuario.ObjectToJson(aObject: TUsuario): TJSONObject;
 var
-  lObject : TCliente;
+  lObject : TUsuario;
 begin
   lObject := aObject;
   Result := TJson.ObjectToJsonObject(lObject);
 end;
 
-function TListCliente.SetData(aJson: TJSONValue): iListCliente;
+function TListUsuario.SetData(aJson: TJSONValue): TUsuario;
 var
   lJsonArray : TJSONArray;
 begin
@@ -155,11 +155,11 @@ begin
   FRecordCount := aJson.GetValue<Integer>('records');
   if aJson.TryGetValue<TJSONArray>('data', lJsonArray) then begin
     SetDataSet(lJsonArray);
-    SetList(lJsonArray);
+    Result := SetList(lJsonArray);
   end;
 end;
 
-function TListCliente.SetDataSet(aJson: TJSONArray): iListCliente;
+function TListUsuario.SetDataSet(aJson: TJSONArray): iListUsuario;
 begin
   FDataSet.DisableControls;
   if FDataSet.FieldCount > 0 then
@@ -168,16 +168,17 @@ begin
   FDataSet.LoadFromJSON(aJson, False);
 
   FDataSet.EnableControls;
-
   FDataSet.Open;
 end;
 
-function TListCliente.SetList(aJson: TJSONArray): iListCliente;
+function TListUsuario.SetList(aJson: TJSONArray): TUsuario;
 begin
   FList.Clear;
 
   for var I := 0 to AJson.Count -1 do
     FList.Add(JsonToObject(aJson.Items[I] as TJSONObject));
+
+  Result := FList.Last;
 end;
 
 end.

@@ -3,11 +3,32 @@ unit Rp.View.Cadastro.Servico;
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Rp.View.Base.Cadastro, Vcl.Buttons,
-  Vcl.ExtCtrls, Vcl.StdCtrls, cxGraphics, cxControls, cxLookAndFeels,
-  cxLookAndFeelPainters, cxContainer, cxEdit, dxSkinsCore, dxSkinBlack,
-  cxTextEdit, cxCurrencyEdit, Rp.Util.Types, Rp.Controller.Servico, Vcl.Menus,
+  Winapi.Windows,
+  Winapi.Messages,
+  System.SysUtils,
+  System.Variants,
+  System.Classes,
+  Vcl.Graphics,
+  Vcl.Controls,
+  Vcl.Forms,
+  Vcl.Dialogs,
+  Rp.View.Base.Cadastro,
+  Vcl.Buttons,
+  Vcl.ExtCtrls,
+  Vcl.StdCtrls,
+  cxGraphics,
+  cxControls,
+  cxLookAndFeels,
+  cxLookAndFeelPainters,
+  cxContainer,
+  cxEdit,
+  dxSkinsCore,
+  dxSkinBlack,
+  cxTextEdit,
+  cxCurrencyEdit,
+  Rp.Util.Types,
+  Rp.Controller.Servico,
+  Vcl.Menus,
   cxButtons;
 
 type
@@ -17,15 +38,12 @@ type
     Label3: TLabel;
     EdtDescricao: TEdit;
     EdtCodigo: TEdit;
-    Panel3: TPanel;
-    Label4: TLabel;
-    edtDescricaoTpServico: TEdit;
-    EdtCodTipoServico: TEdit;
-    btnTipoPesquisa: TcxButton;
     edtVlrVenda: TcxCurrencyEdit;
     procedure btnConfirmClick(Sender: TObject);
   private
     FCadastro : iControllerServico;
+
+    procedure GetController( aCadastro: iControllerServico );
 
     procedure OpenRegister;
     procedure IncludeData;
@@ -50,7 +68,7 @@ begin
   FrmCadastroServico := TFrmCadastroServico.Create(nil);
   try
     FrmCadastroServico.FTypeOperation := aTypeOperation;
-    FrmCadastroServico.FCadastro := aCadastro;
+    FrmCadastroServico.GetController(aCadastro);
     FrmCadastroServico.OpenRegister;
     FrmCadastroServico.ShowModal;
     Result := FrmCadastroServico.ModalResult = mrOk;
@@ -66,13 +84,17 @@ begin
   inherited;
 end;
 
+procedure TFrmCadastroServico.GetController( aCadastro: iControllerServico );
+begin
+  FCadastro := aCadastro;
+end;
+
 procedure TFrmCadastroServico.IncludeData;
 begin
   if FTypeOperation <> TpDelete then begin
-  	FCadastro.Entidade.Id            := StrtoIntDef(edtCodigo.Text,0);
-    FCadastro.Entidade.Descricao     := edtDescricao.Text;
-    FCadastro.Entidade.Vlr_Venda      := edtVlrVenda.value;
-    FCadastro.Entidade.id_Tipo_Servico := StrtoIntDef(edtCodTipoServico.Text,0);
+  	FCadastro.Entidade.Id              := StrtoIntDef(edtCodigo.Text,0);
+    FCadastro.Entidade.Descricao       := edtDescricao.Text;
+    FCadastro.Entidade.Vlr_Venda       := edtVlrVenda.value;
   end;
 end;
 
@@ -91,7 +113,6 @@ begin
     edtCodigo.Text         := IntToStr(FCadastro.Entidade.Id);
     edtDescricao.Text      := FCadastro.Entidade.Descricao;
     edtVlrVenda.value      := FCadastro.Entidade.Vlr_Venda;
-    edtCodTipoServico.Text := IntToStr(FCadastro.Entidade.id_Tipo_Servico);
   end;
 end;
 

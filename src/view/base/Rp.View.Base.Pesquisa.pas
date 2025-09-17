@@ -64,18 +64,19 @@ type
     lblSearch: TLabel;
     edtSearch: TcxTextEdit;
     pnlBotoes: TPanel;
-    btnPesquisar: TSpeedButton;
     btnExcluir: TSpeedButton;
     btnAlterar: TSpeedButton;
     btnIncluir: TSpeedButton;
     DS: TDataSource;
-    Panel5: TPanel;
+    pnlBtnSearch: TPanel;
     btnSeach: TSpeedButton;
+    pnlSearch: TPanel;
     procedure FormCreate(Sender: TObject);
     procedure GridPesquisaDBTableViewColumnHeaderClick(Sender: TcxGridTableView;
       AColumn: TcxGridColumn);
-    procedure btnSeachClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
+    procedure edtSearchKeyPress(Sender: TObject; var Key: Char);
+    procedure btnSeachClick(Sender: TObject);
   protected
     FFieldSeach : String;
     FController : iController;
@@ -91,8 +92,14 @@ implementation
 procedure TFrmBasePesquisa.btnSeachClick(Sender: TObject);
 begin
   inherited;
-  if EdtSearch.Text <> '' then
-    DS.DataSet.Locate(FFieldSeach, EdtSearch.Text, [loPartialKey]);
+  //
+end;
+
+procedure TFrmBasePesquisa.edtSearchKeyPress(Sender: TObject; var Key: Char);
+begin
+  inherited;
+  if Key = chr(13) then
+    btnSeachClick(nil);
 end;
 
 procedure TFrmBasePesquisa.FormCreate(Sender: TObject);

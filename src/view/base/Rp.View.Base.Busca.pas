@@ -21,25 +21,23 @@ type
     GridPesquisaDBTableView: TcxGridDBTableView;
     GridPesquisaLevel: TcxGridLevel;
     pnlTop: TPanel;
-    PnlTopTitle: TPanel;
-    lblTitleForm: TcxLabel;
     pnlTopInfo: TPanel;
-    lblSearch: TLabel;
-    edtSearch: TcxTextEdit;
+    lblSeach: TLabel;
+    edtSeach: TcxTextEdit;
     Panel5: TPanel;
     btnSeach: TSpeedButton;
     DS: TDataSource;
-    procedure btnSeachClick(Sender: TObject);
     procedure GridPesquisaDBTableViewColumnHeaderClick(Sender: TcxGridTableView;
       AColumn: TcxGridColumn);
     procedure GridPesquisaDBTableViewEditDblClick(
       Sender: TcxCustomGridTableView; AItem: TcxCustomGridTableItem;
       AEdit: TcxCustomEdit);
     procedure FormCreate(Sender: TObject);
-  private
+    procedure btnCancelClick(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+  protected
     FFieldSeach: String;
-  public
-
+    procedure SetFieldSeach(aValue: TcxGridColumn);
   end;
 
 var
@@ -49,26 +47,32 @@ implementation
 
 {$R *.dfm}
 
-procedure TFrmBaseBusca.btnSeachClick(Sender: TObject);
+procedure TFrmBaseBusca.btnCancelClick(Sender: TObject);
 begin
   inherited;
-  if EdtSearch.Text <> '' then
-    DS.DataSet.Locate(FFieldSeach, EdtSearch.Text, [loPartialKey]);
+  ModalResult := mrCancel;
 end;
 
 procedure TFrmBaseBusca.FormCreate(Sender: TObject);
 begin
   inherited;
-  lblSearch.Caption := GridPesquisaDBTableView.Columns[0].Caption;
-  FFieldSeach       := GridPesquisaDBTableView.Columns[0].DataBinding.FilterFieldName;
+  lblSeach.Caption := GridPesquisaDBTableView.Columns[0].Caption;
+  FFieldSeach      := GridPesquisaDBTableView.Columns[0].DataBinding.FilterFieldName;
+  GridPesquisaDBTableViewColumnHeaderClick(GridPesquisaDBTableView, GridPesquisaDBTableView.Columns[0]);
+end;
+
+procedure TFrmBaseBusca.FormShow(Sender: TObject);
+begin
+  inherited;
+  edtSeach.SelStart := Length(edtSeach.Text);
+  edtSeach.SetFocus;
 end;
 
 procedure TFrmBaseBusca.GridPesquisaDBTableViewColumnHeaderClick(
   Sender: TcxGridTableView; AColumn: TcxGridColumn);
 begin
   inherited;
-  FFieldSeach := AColumn.DataBinding.FilterFieldName;
-  LblSearch.Caption := 'Buscar ' + AColumn.Caption;
+  SetFieldSeach(AColumn);
 end;
 
 procedure TFrmBaseBusca.GridPesquisaDBTableViewEditDblClick(
@@ -77,6 +81,12 @@ procedure TFrmBaseBusca.GridPesquisaDBTableViewEditDblClick(
 begin
   inherited;
   ModalResult := mrOk;
+end;
+
+procedure TFrmBaseBusca.SetFieldSeach(aValue: TcxGridColumn);
+begin
+  FFieldSeach := aValue.DataBinding.FilterFieldName;
+  LblSeach.Caption := 'Buscar ' + aValue.Caption;
 end;
 
 end.

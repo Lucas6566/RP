@@ -153,7 +153,6 @@ begin
   FDataSet.FieldDefs.Add('id', ftInteger);
   FDataSet.FieldDefs.Add('id_servico', ftInteger);
   FDataSet.FieldDefs.Add('descrservico', ftString, 100);
-  FDataSet.FieldDefs.Add('id_tipo_servico', ftInteger);
   FDataSet.FieldDefs.Add('vlr_unitario', ftCurrency);
   FDataSet.FieldDefs.Add('qtd_servico', ftCurrency);
   FDataSet.FieldDefs.Add('vlr_desc', ftCurrency);

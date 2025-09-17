@@ -57,7 +57,6 @@ type
     GridNome: TcxGridDBColumn;
     procedure btnIncluirClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
-    procedure btnPesquisarClick(Sender: TObject);
     procedure btnExcluirClick(Sender: TObject);
     procedure btnAlterarClick(Sender: TObject);
 
@@ -88,12 +87,6 @@ procedure TFrmPesquisaCliente.btnIncluirClick(Sender: TObject);
 begin
   inherited;
   TFrmCadastroCliente.ClienteShow(TpInsert, FPesquisa);
-end;
-
-procedure TFrmPesquisaCliente.btnPesquisarClick(Sender: TObject);
-begin
-  inherited;
-  FPesquisa.Find;
 end;
 
 procedure TFrmPesquisaCliente.FormCreate(Sender: TObject);

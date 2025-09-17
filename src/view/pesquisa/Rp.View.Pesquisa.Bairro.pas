@@ -59,9 +59,9 @@ type
     GridCodigoCidade: TcxGridDBColumn;
     procedure btnIncluirClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
-    procedure btnPesquisarClick(Sender: TObject);
     procedure btnExcluirClick(Sender: TObject);
     procedure btnAlterarClick(Sender: TObject);
+    procedure btnSeachClick(Sender: TObject);
 
   private
     FPesquisa : iControllerBairro;
@@ -92,7 +92,7 @@ begin
   TFrmCadastroBairro.BairroShow(TpInsert, FPesquisa);
 end;
 
-procedure TFrmPesquisaBairro.btnPesquisarClick(Sender: TObject);
+procedure TFrmPesquisaBairro.btnSeachClick(Sender: TObject);
 begin
   inherited;
   FPesquisa.Find;

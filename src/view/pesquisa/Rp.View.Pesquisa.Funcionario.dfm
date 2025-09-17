@@ -18,7 +18,6 @@ inherited FrmPesquisaFuncionario: TFrmPesquisaFuncionario
         ExplicitHeight = 484
         inherited GridPesquisa: TcxGrid
           Height = 484
-          ExplicitTop = 1
           ExplicitHeight = 484
           inherited GridPesquisaDBTableView: TcxGridDBTableView
             object GridCodigo: TcxGridDBColumn
@@ -51,16 +50,12 @@ inherited FrmPesquisaFuncionario: TFrmPesquisaFuncionario
             StyleDisabled.LookAndFeel.SkinName = ''
             StyleFocused.LookAndFeel.SkinName = ''
             StyleHot.LookAndFeel.SkinName = ''
-            Transparent = True
             AnchorY = 26
           end
         end
         inherited pnlTopInfo: TPanel
           inherited pnlBotoes: TPanel
             ParentColor = True
-            inherited btnPesquisar: TSpeedButton
-              OnClick = btnPesquisarClick
-            end
             inherited btnExcluir: TSpeedButton
               OnClick = btnExcluirClick
             end

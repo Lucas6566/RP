@@ -122,7 +122,7 @@ end;
 procedure TListVenda.CreateFieldsDataSet;
 begin
   FDataSet.FieldDefs.Add('id', ftInteger);
-  FDataSet.FieldDefs.Add('id_cliente ', ftInteger);
+  FDataSet.FieldDefs.Add('id_cliente', ftInteger);
   FDataSet.FieldDefs.Add('nome_cliente', ftString, 100);
   FDataSet.FieldDefs.Add('doc_cliente', ftString, 14);
   FDataSet.FieldDefs.Add('fone_cliente', ftString, 20);

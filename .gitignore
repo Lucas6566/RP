@@ -1,2 +1,13 @@
 dcu
-src\model\entity\__history
+src/model/entity/__history
+src/controller/__history
+src/model/__history
+src/model/dao/__history
+src/model/list/__history
+src/util/__history
+src/view/__history
+src/view/base/__history
+src/view/busca/__history
+src/view/cadastro/__history
+src/view/movimento/__history
+src/view/pesquisa/__history

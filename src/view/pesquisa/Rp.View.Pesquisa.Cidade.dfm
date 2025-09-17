@@ -50,19 +50,12 @@ inherited FrmPesquisaCidade: TFrmPesquisaCidade
             StyleDisabled.LookAndFeel.SkinName = ''
             StyleFocused.LookAndFeel.SkinName = ''
             StyleHot.LookAndFeel.SkinName = ''
-            Transparent = True
             AnchorY = 26
           end
         end
         inherited pnlTopInfo: TPanel
-          inherited edtSearch: TcxTextEdit
-            ExplicitHeight = 23
-          end
           inherited pnlBotoes: TPanel
             ParentColor = True
-            inherited btnPesquisar: TSpeedButton
-              OnClick = btnPesquisarClick
-            end
             inherited btnExcluir: TSpeedButton
               OnClick = btnExcluirClick
             end

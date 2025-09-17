@@ -27,8 +27,8 @@ type
     function GeneratorJson( aObject : TBairro ) : TJSONObject;
     function GetJson : TJSONObject;
 
-    function SetData(aJson: TJSONValue): iListBairro;
-    function SetList(aJson: TJSONArray): iListBairro;
+    function SetData(aJson: TJSONValue): TBairro;
+    function SetList(aJson: TJSONArray): TBairro;
     function SetDataSet(aJson: TJSONArray): iListBairro;
 
     function LocalizaList: TBairro;
@@ -55,8 +55,8 @@ type
     function GeneratorJson( aObject : TBairro ) : TJSONObject;
     function GetJson : TJSONObject;
 
-    function SetData(aJson: TJSONValue): iListBairro;
-    function SetList(aJson: TJSONArray): iListBairro;
+    function SetData(aJson: TJSONValue): TBairro;
+    function SetList(aJson: TJSONArray): TBairro;
     function SetDataSet(aJson: TJSONArray): iListBairro;
 
     function LocalizaList: TBairro;
@@ -147,7 +147,7 @@ begin
   Result := TJson.ObjectToJsonObject(lObject);
 end;
 
-function TListBairro.SetData(aJson: TJSONValue): iListBairro;
+function TListBairro.SetData(aJson: TJSONValue): TBairro;
 var
   lJsonArray : TJSONArray;
 begin
@@ -155,7 +155,7 @@ begin
   FRecordCount := aJson.GetValue<Integer>('records');
   if aJson.TryGetValue<TJSONArray>('data', lJsonArray) then begin
     SetDataSet(lJsonArray);
-    SetList(lJsonArray);
+    Result := SetList(lJsonArray);
   end;
 end;
 
@@ -171,12 +171,14 @@ begin
   FDataSet.Open;
 end;
 
-function TListBairro.SetList(aJson: TJSONArray): iListBairro;
+function TListBairro.SetList(aJson: TJSONArray): TBairro;
 begin
   FList.Clear;
 
   for var I := 0 to AJson.Count -1 do
     FList.Add(JsonToObject(aJson.Items[I] as TJSONObject));
+
+  Result := FList.Last;
 end;
 
 end.

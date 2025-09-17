@@ -1,8 +1,11 @@
 inherited FrmBuscaServico: TFrmBuscaServico
-  Caption = 'FrmBuscaServico'
-  OnCreate = FormCreate
+  Caption = 'Buscar Servico'
+  ClientHeight = 483
+  ClientWidth = 441
   TextHeight = 15
   inherited pnlBackground: TPanel
+    Width = 441
+    Height = 483
     inherited pnlMainCenter: TPanel
       inherited pnlClient: TPanel
         inherited GridPesquisa: TcxGrid
@@ -12,8 +15,8 @@ inherited FrmBuscaServico: TFrmBuscaServico
               DataBinding.FieldName = 'id'
               DataBinding.IsNullValueType = True
             end
-            object GridDescricao: TcxGridDBColumn
-              Caption = 'Servi'#231'o'
+            object GridNome: TcxGridDBColumn
+              Caption = 'Nome'
               DataBinding.FieldName = 'descricao'
               DataBinding.IsNullValueType = True
               Width = 272
@@ -22,25 +25,15 @@ inherited FrmBuscaServico: TFrmBuscaServico
         end
       end
       inherited pnlTop: TPanel
-        inherited PnlTopTitle: TPanel
-          inherited lblTitleForm: TcxLabel
-            Caption = 'Busca Servi'#231'o'
-            Style.LookAndFeel.SkinName = ''
-            StyleDisabled.LookAndFeel.SkinName = ''
-            StyleFocused.LookAndFeel.SkinName = ''
-            StyleHot.LookAndFeel.SkinName = ''
-            ExplicitWidth = 263
-            Width = 263
-            AnchorY = 26
-          end
-        end
         inherited pnlTopInfo: TPanel
+          inherited edtSeach: TcxTextEdit
+            ExplicitHeight = 23
+          end
           inherited Panel5: TPanel
             inherited btnSeach: TSpeedButton
+              OnClick = btnSeachClick
               ExplicitLeft = 5
-              ExplicitTop = 1
-              ExplicitWidth = 23
-              ExplicitHeight = 21
+              ExplicitTop = 0
             end
           end
         end

@@ -1,14 +1,29 @@
 inherited FrmBuscaCliente: TFrmBuscaCliente
-  Caption = 'FrmBuscaCliente'
-  OnCreate = FormCreate
+  Caption = 'Buscar Cliente'
+  ClientHeight = 484
+  ClientWidth = 437
+  ExplicitWidth = 449
+  ExplicitHeight = 522
   TextHeight = 15
   inherited pnlBackground: TPanel
+    Width = 437
+    Height = 484
+    ExplicitHeight = 483
     inherited pnlMainCenter: TPanel
+      Width = 437
+      Height = 484
+      ExplicitHeight = 484
+      inherited pnlButton: TPanel
+        Top = 454
+        ExplicitTop = 453
+      end
       inherited pnlClient: TPanel
+        Height = 397
+        ExplicitHeight = 396
         inherited GridPesquisa: TcxGrid
-          ExplicitTop = 6
+          Height = 397
+          ExplicitHeight = 396
           inherited GridPesquisaDBTableView: TcxGridDBTableView
-            OnEditDblClick = GridPesquisaDBTableViewEditDblClick
             object GridCodigo: TcxGridDBColumn
               Caption = 'Codigo'
               DataBinding.FieldName = 'id'
@@ -30,13 +45,13 @@ inherited FrmBuscaCliente: TFrmBuscaCliente
         end
       end
       inherited pnlTop: TPanel
-        inherited PnlTopTitle: TPanel
-          inherited lblTitleForm: TcxLabel
-            Style.LookAndFeel.SkinName = ''
-            StyleDisabled.LookAndFeel.SkinName = ''
-            StyleFocused.LookAndFeel.SkinName = ''
-            StyleHot.LookAndFeel.SkinName = ''
-            AnchorY = 26
+        inherited pnlTopInfo: TPanel
+          inherited Panel5: TPanel
+            inherited btnSeach: TSpeedButton
+              OnClick = btnSeachClick
+              ExplicitLeft = 5
+              ExplicitTop = 0
+            end
           end
         end
       end

@@ -22,9 +22,9 @@ type
     pnlBottom: TPanel;
     btnConfirm: TSpeedButton;
     btnCancel: TSpeedButton;
-    procedure btnCancelClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure btnConfirmClick(Sender: TObject);
+    procedure btnCancelClick(Sender: TObject);
   public
     FTypeOperation: TTypeOperation;
 

@@ -8,7 +8,7 @@ uses
   Vcl.ExtCtrls, Vcl.StdCtrls, cxGraphics, cxControls, cxLookAndFeels,
   cxLookAndFeelPainters, cxContainer, cxEdit, dxSkinsCore, dxSkinBlack,
   cxTextEdit, cxCurrencyEdit, Rp.Util.Types, Rp.Controller.Cliente, cxCheckBox,
-  dxToggleSwitch;
+  dxToggleSwitch, Rp.Controller.Bairro, Rp.View.Busca.Bairro;
 
 type
   TFrmCadastroCliente = class(TFrmBaseCadastro)
@@ -38,16 +38,23 @@ type
     Label7: TLabel;
     Label8: TLabel;
     edtCodigoBairro: TEdit;
+    pnlSeachCidade: TPanel;
+    btnSeachCidade: TSpeedButton;
     procedure btnConfirmClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure TgSTipoPessoaClick(Sender: TObject);
+    procedure btnSeachCidadeClick(Sender: TObject);
   private
     FCadastro : iControllerCliente;
+    FBairro   : iControllerBairro;
 
+    procedure GetController(aCadastro : iControllerCliente);
     procedure TipoPessoa;
     procedure OpenRegister;
+    procedure OpenRegisterBairro;
     procedure IncludeData;
     procedure IncludeRegister;
+    procedure SeachBairro;
   public
     class function ClienteShow(aTypeOperation : TTypeOperation; aCadastro : iControllerCliente ): Boolean;
   end;
@@ -62,13 +69,19 @@ implementation
 
 { TFrmCadastroCliente }
 
+procedure TFrmCadastroCliente.btnSeachCidadeClick(Sender: TObject);
+begin
+  inherited;
+  SeachBairro;
+end;
+
 class function TFrmCadastroCliente.ClienteShow(
   aTypeOperation : TTypeOperation; aCadastro : iControllerCliente ): Boolean;
 begin
   FrmCadastroCliente := TFrmCadastroCliente.Create(nil);
   try
     FrmCadastroCliente.FTypeOperation := aTypeOperation;
-    FrmCadastroCliente.FCadastro := aCadastro;
+    FrmCadastroCliente.GetController(aCadastro);
     FrmCadastroCliente.OpenRegister;
     FrmCadastroCliente.ShowModal;
     Result := FrmCadastroCliente.ModalResult = mrOk;
@@ -81,6 +94,12 @@ procedure TFrmCadastroCliente.FormCreate(Sender: TObject);
 begin
   inherited;
   TipoPessoa;
+end;
+
+procedure TFrmCadastroCliente.GetController(aCadastro : iControllerCliente);
+begin
+  FCadastro := aCadastro;
+  FBairro := FCadastro.Bairro;
 end;
 
 procedure TFrmCadastroCliente.btnConfirmClick(Sender: TObject);
@@ -128,6 +147,26 @@ begin
     edtComplemento.Text     := FCadastro.Entidade.Complemento;
     edtEmail.Text           := FCadastro.Entidade.email;
     edtTelefone.Text        := FCadastro.Entidade.telefone;
+
+    FBairro.Find(edtCodigoBairro.Text);
+    OpenRegisterBairro;
+  end;
+end;
+
+procedure TFrmCadastroCliente.OpenRegisterBairro;
+begin
+  edtBairro.Text       := FBairro.Entidade.nome;
+  FBairro.Cidade.Find(IntToStr(FBairro.Entidade.id_cidade));
+  EdtCidade.Text       := FBairro.Cidade.Entidade.nome;
+  edtuf.Text           := FBairro.Cidade.Entidade.uf;
+end;
+
+procedure TFrmCadastroCliente.SeachBairro;
+begin
+  FBairro := TFrmBuscaBairro.ShowBuscaBairro;
+  if Assigned(FBairro) then begin
+    edtCodigoBairro.Text := intToStr(FBairro.Entidade.id);
+    OpenRegisterBairro;
   end;
 end;
 

@@ -27,8 +27,8 @@ type
     function GeneratorJson( aObject : TCidade ) : TJSONObject;
     function GetJson : TJSONObject;
 
-    function SetData(aJson: TJSONValue): iListCidade;
-    function SetList(aJson: TJSONArray): iListCidade;
+    function SetData(aJson: TJSONValue): TCidade;
+    function SetList(aJson: TJSONArray): TCidade;
     function SetDataSet(aJson: TJSONArray): iListCidade;
 
     function LocalizaList: TCidade;
@@ -54,8 +54,8 @@ type
     function GeneratorJson( aObject : TCidade ) : TJSONObject;
     function GetJson : TJSONObject;
 
-    function SetData(aJson: TJSONValue): iListCidade;
-    function SetList(aJson: TJSONArray): iListCidade;
+    function SetData(aJson: TJSONValue): TCidade;
+    function SetList(aJson: TJSONArray): TCidade;
     function SetDataSet(aJson: TJSONArray): iListCidade;
 
     function LocalizaList: TCidade;
@@ -133,7 +133,7 @@ begin
   Result := TJson.ObjectToJsonObject(lObject);
 end;
 
-function TListCidade.SetData(aJson: TJSONValue): iListCidade;
+function TListCidade.SetData(aJson: TJSONValue): TCidade;
 var
   lJsonArray : TJSONArray;
 begin
@@ -141,7 +141,7 @@ begin
   FRecordCount := aJson.GetValue<Integer>('records');
   if aJson.TryGetValue<TJSONArray>('data', lJsonArray) then begin
     SetDataSet(lJsonArray);
-    SetList(lJsonArray);
+    Result := SetList(lJsonArray);
   end;
 end;
 
@@ -157,12 +157,14 @@ begin
   FDataSet.Open;
 end;
 
-function TListCidade.SetList(aJson: TJSONArray): iListCidade;
+function TListCidade.SetList(aJson: TJSONArray): TCidade;
 begin
   FList.Clear;
 
   for var I := 0 to AJson.Count -1 do
     FList.Add(JsonToObject(aJson.Items[I] as TJSONObject));
+
+  Result := FList.Last;
 end;
 
 end.

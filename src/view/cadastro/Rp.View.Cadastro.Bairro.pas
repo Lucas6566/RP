@@ -3,12 +3,35 @@ unit Rp.View.Cadastro.Bairro;
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Rp.View.Base.Cadastro, Vcl.Buttons,
-  Vcl.ExtCtrls, Vcl.StdCtrls, cxGraphics, cxControls, cxLookAndFeels,
-  cxLookAndFeelPainters, cxContainer, cxEdit, dxSkinsCore, dxSkinBlack,
-  cxTextEdit, cxCurrencyEdit, Rp.Util.Types, Rp.Controller.Bairro, Vcl.Menus,
-  cxButtons;
+  Winapi.Windows,
+  Winapi.Messages,
+  System.SysUtils,
+  System.Variants,
+  System.Classes,
+  Vcl.Graphics,
+  Vcl.Controls,
+  Vcl.Forms,
+  Vcl.Dialogs,
+  Rp.View.Base.Cadastro,
+  Vcl.Buttons,
+  Vcl.ExtCtrls,
+  Vcl.StdCtrls,
+  cxGraphics,
+  cxControls,
+  cxLookAndFeels,
+  cxLookAndFeelPainters,
+  cxContainer,
+  cxEdit,
+  dxSkinsCore,
+  dxSkinBlack,
+  cxTextEdit,
+  cxCurrencyEdit,
+  Rp.Util.Types,
+  Rp.Controller.Bairro,
+  Vcl.Menus,
+  cxButtons,
+  Rp.Controller.Cidade,
+  Rp.View.Busca.Cidade;
 
 type
   TFrmCadastroBairro = class(TFrmBaseCadastro)
@@ -22,13 +45,23 @@ type
     edtCodigoCidade: TEdit;
     Label5: TLabel;
     Label4: TLabel;
+    pnlSeachCidade: TPanel;
+    btnSeachCidade: TSpeedButton;
+    EdtUf: TEdit;
+    Label6: TLabel;
     procedure btnConfirmClick(Sender: TObject);
+    procedure btnSeachCidadeClick(Sender: TObject);
   private
     FCadastro : iControllerBairro;
+    FCidade : iControllerCidade;
+
+    procedure GetController(aCadastro: iControllerBairro);
 
     procedure OpenRegister;
     procedure IncludeData;
     procedure IncludeRegister;
+
+    procedure SeachCidade;
   public
     class function BairroShow(aTypeOperation : TTypeOperation; aCadastro : iControllerBairro ): Boolean;
   end;
@@ -49,7 +82,7 @@ begin
   FrmCadastroBairro := TFrmCadastroBairro.Create(nil);
   try
     FrmCadastroBairro.FTypeOperation := aTypeOperation;
-    FrmCadastroBairro.FCadastro := aCadastro;
+    FrmCadastroBairro.GetController(aCadastro);
     FrmCadastroBairro.OpenRegister;
     FrmCadastroBairro.ShowModal;
     Result := FrmCadastroBairro.ModalResult = mrOk;
@@ -63,6 +96,18 @@ begin
   IncludeData;
   IncludeRegister;
   inherited;
+end;
+
+procedure TFrmCadastroBairro.btnSeachCidadeClick(Sender: TObject);
+begin
+  inherited;
+  SeachCidade;
+end;
+
+procedure TFrmCadastroBairro.GetController(aCadastro: iControllerBairro);
+begin
+  FCadastro := aCadastro;
+  FCidade := FCadastro.Cidade;
 end;
 
 procedure TFrmCadastroBairro.IncludeData;
@@ -91,6 +136,19 @@ begin
     edtNome.Text         := FCadastro.Entidade.Nome;
     edtTaxaEntrega.value := FCadastro.Entidade.Taxa_entrega;
     edtCodigoCidade.Text := IntToStr(FCadastro.Entidade.id_cidade);
+
+    FCidade.Find(edtCodigoCidade.Text);
+    edtCidade.Text := FCidade.Entidade.nome;
+  end;
+end;
+
+procedure TFrmCadastroBairro.SeachCidade;
+begin
+  FCidade := TFrmBuscaCidade.ShowBuscaCidade;
+  if Assigned(FCidade) then begin
+    edtCodigoCidade.Text := intToStr(FCidade.Entidade.id);
+    edtCidade.Text       := FCidade.Entidade.nome;
+    edtUF.Text           := FCidade.Entidade.uf;
   end;
 end;
 

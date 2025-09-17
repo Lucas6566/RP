@@ -1,56 +1,65 @@
 inherited FrmBaseBusca: TFrmBaseBusca
-  BorderStyle = bsNone
+  BorderStyle = bsSingle
   Caption = 'FrmBaseBusca'
-  ClientHeight = 521
-  ClientWidth = 453
+  ClientHeight = 483
+  ClientWidth = 441
+  Position = poMainFormCenter
   OnCreate = FormCreate
+  OnShow = FormShow
   ExplicitWidth = 453
   ExplicitHeight = 521
   TextHeight = 15
   inherited pnlBackground: TPanel
-    Width = 453
-    Height = 521
-    ExplicitTop = 0
-    ExplicitWidth = 453
-    ExplicitHeight = 521
+    Width = 441
+    Height = 483
+    ExplicitWidth = 437
+    ExplicitHeight = 482
     object pnlMainCenter: TPanel
       Left = 0
       Top = 0
-      Width = 453
-      Height = 521
+      Width = 441
+      Height = 483
       Align = alClient
       BevelOuter = bvNone
       ParentBackground = False
       ParentColor = True
       TabOrder = 0
+      ExplicitWidth = 437
+      ExplicitHeight = 482
       object pnlButton: TPanel
         Left = 0
-        Top = 491
-        Width = 453
+        Top = 453
+        Width = 441
         Height = 30
         Align = alBottom
         BevelOuter = bvNone
         ParentBackground = False
         ParentColor = True
         TabOrder = 0
+        ExplicitTop = 452
+        ExplicitWidth = 437
       end
       object pnlClient: TPanel
         Left = 0
-        Top = 96
-        Width = 453
-        Height = 395
+        Top = 57
+        Width = 441
+        Height = 396
         Align = alClient
         BevelOuter = bvNone
         ParentBackground = False
         ParentColor = True
         TabOrder = 1
+        ExplicitWidth = 437
+        ExplicitHeight = 395
         object GridPesquisa: TcxGrid
           Left = 0
           Top = 0
-          Width = 453
-          Height = 395
+          Width = 441
+          Height = 396
           Align = alClient
           TabOrder = 0
+          ExplicitWidth = 437
+          ExplicitHeight = 395
           object GridPesquisaDBTableView: TcxGridDBTableView
             Navigator.Buttons.CustomButtons = <>
             ScrollbarAnnotations.CustomAnnotations = <>
@@ -70,98 +79,42 @@ inherited FrmBaseBusca: TFrmBaseBusca
       object pnlTop: TPanel
         Left = 0
         Top = 0
-        Width = 453
-        Height = 96
+        Width = 441
+        Height = 57
         Align = alTop
         BevelOuter = bvNone
         ParentBackground = False
         ParentColor = True
         TabOrder = 2
-        object PnlTopTitle: TPanel
+        ExplicitWidth = 437
+        object pnlTopInfo: TPanel
           Left = 0
           Top = 0
-          Width = 453
+          Width = 441
           Height = 51
           Align = alTop
           BevelOuter = bvNone
-          Ctl3D = True
           ParentBackground = False
           ParentColor = True
-          ParentCtl3D = False
           TabOrder = 0
-          object lblTitleForm: TcxLabel
-            AlignWithMargins = True
-            Left = 10
-            Top = 3
-            Margins.Left = 10
-            Touch.ParentTabletOptions = False
-            Touch.TabletOptions = [toPressAndHold]
-            Align = alLeft
-            AutoSize = False
-            Caption = 'lblTitleForm'
-            Constraints.MinWidth = 100
-            ParentColor = False
-            ParentFont = False
-            ParentShowHint = False
-            ShowHint = False
-            Style.BorderStyle = ebsNone
-            Style.Edges = [bLeft, bTop, bRight, bBottom]
-            Style.Font.Charset = ANSI_CHARSET
-            Style.Font.Color = clWindowText
-            Style.Font.Height = -23
-            Style.Font.Name = 'Open Sans'
-            Style.Font.Style = [fsBold]
-            Style.HotTrack = False
-            Style.LookAndFeel.Kind = lfUltraFlat
-            Style.LookAndFeel.NativeStyle = False
-            Style.LookAndFeel.SkinName = ''
-            Style.Shadow = False
-            Style.TransparentBorder = True
-            Style.IsFontAssigned = True
-            StyleDisabled.BorderStyle = ebsNone
-            StyleDisabled.LookAndFeel.Kind = lfUltraFlat
-            StyleDisabled.LookAndFeel.NativeStyle = False
-            StyleDisabled.LookAndFeel.SkinName = ''
-            StyleDisabled.TextStyle = []
-            StyleFocused.LookAndFeel.Kind = lfUltraFlat
-            StyleFocused.LookAndFeel.NativeStyle = False
-            StyleFocused.LookAndFeel.SkinName = ''
-            StyleHot.LookAndFeel.Kind = lfUltraFlat
-            StyleHot.LookAndFeel.NativeStyle = False
-            StyleHot.LookAndFeel.SkinName = ''
-            Properties.Alignment.Horz = taLeftJustify
-            Properties.Alignment.Vert = taVCenter
-            Height = 45
-            Width = 167
-            AnchorY = 26
-          end
-        end
-        object pnlTopInfo: TPanel
-          Left = 0
-          Top = 51
-          Width = 453
-          Height = 44
-          Align = alTop
-          BevelOuter = bvNone
-          ParentBackground = False
-          ParentColor = True
-          TabOrder = 1
-          object lblSearch: TLabel
+          ExplicitWidth = 437
+          object lblSeach: TLabel
             Left = 18
-            Top = 3
-            Width = 48
+            Top = 7
+            Width = 44
             Height = 15
-            Caption = 'lblSearch'
+            Caption = 'lblSeach'
           end
-          object edtSearch: TcxTextEdit
+          object edtSeach: TcxTextEdit
             Left = 18
-            Top = 17
+            Top = 21
+            Properties.AutoSelect = False
             TabOrder = 0
             Width = 150
           end
           object Panel5: TPanel
             Left = 169
-            Top = 17
+            Top = 21
             Width = 25
             Height = 23
             BevelOuter = bvSpace
@@ -227,11 +180,7 @@ inherited FrmBaseBusca: TFrmBaseBusca
                 0021021B410F04003C050B0B0B0B0B0B0B0B0B0B0B0B0B06200000000000000D
                 090B0B0B0B0B0B0B0B0B0B0B0B0B0B0B0B3D1435152C340B0B0B0B0B0B0B0B0B
                 0B0B0B0B0B0B0B0B0B0B0B0B0B0B0B0B0B0B0B0B0B0B0B0B0B0B}
-              OnClick = btnSeachClick
-              ExplicitLeft = 3
               ExplicitTop = 9
-              ExplicitWidth = 22
-              ExplicitHeight = 19
             end
           end
         end

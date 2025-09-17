@@ -27,10 +27,13 @@ type
     function GeneratorJson( aObject : TServico ) : TJSONObject;
     function GetJson : TJSONObject;
 
-    function SetData(aJson: TJSONValue): iListServico;
+    function SetData(aJson: TJSONValue): Boolean;
     function SetList(aJson: TJSONArray): iListServico;
     function SetDataSet(aJson: TJSONArray): iListServico;
+    function GetObject : TServico;
     function SetObject(aObject : TServico) : TServico;
+
+    function Item: TServico;
 
     function LocalizaList: TServico;
 
@@ -56,10 +59,13 @@ type
     function GeneratorJson( aObject : TServico ) : TJSONObject;
     function GetJson : TJSONObject;
 
-    function SetData(aJson: TJSONValue): iListServico;
+    function SetData(aJson: TJSONValue): Boolean;
     function SetList(aJson: TJSONArray): iListServico;
     function SetDataSet(aJson: TJSONArray): iListServico;
+    function GetObject : TServico;
     function SetObject(aObject : TServico) : TServico;
+
+    function Item: TServico;
 
     function LocalizaList: TServico;
 
@@ -86,6 +92,18 @@ begin
       Break;
     end;
   end;
+end;
+
+function TListServico.GetObject: TServico;
+begin
+  Result := FList.Items[0];
+end;
+
+function TListServico.Item: TServico;
+begin
+  if FList.Count = 0 then
+    FList.Add(TServico.Create);
+  Result := FList.Last;
 end;
 
 function TListServico.JsonToObject(aJson: TJSONObject): TServico;
@@ -117,7 +135,6 @@ begin
   FDataSet.FieldDefs.Add('id', ftInteger);
   FDataSet.FieldDefs.Add('descricao', ftString, 100);
   FDataSet.FieldDefs.Add('vlr_venda', ftCurrency);
-  FDataSet.FieldDefs.Add('id_tipo_servico', ftInteger);
 
   FDataSet.CreateDataSet;
 
@@ -149,12 +166,14 @@ begin
   Result := TJson.ObjectToJsonObject(lObject);
 end;
 
-function TListServico.SetData(aJson: TJSONValue): iListServico;
+function TListServico.SetData(aJson: TJSONValue): Boolean;
 var
   lJsonArray : TJSONArray;
 begin
-  Result := nil;
-  FRecordCount := aJson.GetValue<Integer>('records');
+  aJson.TryGetValue<Integer>('records', FRecordCount);
+
+  Result := FRecordCount > 0;
+
   if aJson.TryGetValue<TJSONArray>('data', lJsonArray) then begin
     SetDataSet(lJsonArray);
     SetList(lJsonArray);

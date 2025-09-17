@@ -77,7 +77,7 @@ end;
 procedure TFrmPesquisaVenda.btnExcluirClick(Sender: TObject);
 begin
   inherited;
-  if Mensagem('Você deseja fazer a exclusão da Venda '+DS.DataSet.FieldByName('descricao').AsString, tpPergunta) then
+  if Mensagem('Você deseja fazer a exclusão da Venda '+DS.DataSet.FieldByName('id').AsString, tpPergunta) then
     FPesquisa.Delete;
 end;
 

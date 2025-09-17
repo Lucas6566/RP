@@ -27,9 +27,10 @@ type
     function GeneratorJson( aObject : TCliente ) : TJSONObject;
     function GetJson : TJSONObject;
 
-    function SetData(aJson: TJSONValue): iListCliente;
+    function SetData(aJson: TJSONValue): Boolean;
     function SetList(aJson: TJSONArray): iListCliente;
     function SetDataSet(aJson: TJSONArray): iListCliente;
+    function GetObject : TCliente;
     function SetObject(aObject : TCliente) : TCliente;
 
     function LocalizaList: TCliente; overload;
@@ -57,9 +58,11 @@ type
     function GeneratorJson( aObject : TCliente ) : TJSONObject;
     function GetJson : TJSONObject;
 
-    function SetData(aJson: TJSONValue): iListCliente;
+    function SetData(aJson: TJSONValue): Boolean;
     function SetList(aJson: TJSONArray): iListCliente;
     function SetDataSet(aJson: TJSONArray): iListCliente;
+
+    function GetObject : TCliente;
     function SetObject(aObject : TCliente) : TCliente;
 
     function LocalizaList: TCliente; overload;
@@ -90,6 +93,11 @@ begin
   end;
 end;
 
+function TListCliente.GetObject: TCliente;
+begin
+  Result := FList.Items[0];
+end;
+
 function TListCliente.JsonToObject(aJson: TJSONObject): TCliente;
 begin
   Result := TJson.JsonToObject<TCliente>(aJson, []);
@@ -110,16 +118,6 @@ end;
 function TListCliente.LocalizaList: TCliente;
 begin
   Result := LocalizaList(FDataSet.FieldByName('id').AsInteger)
-  {
-  Result := nil;
-  for var I := 0 to FList.Count-1 do
-  begin
-    if FList.Items[I].id = FDataSet.FieldByName('id').AsInteger then begin
-      Result := FList.Items[I];
-      break;
-    end;
-  end;
-  }
 end;
 
 constructor TListCliente.Create;
@@ -173,12 +171,14 @@ begin
   Result := TJson.ObjectToJsonObject(lObject);
 end;
 
-function TListCliente.SetData(aJson: TJSONValue): iListCliente;
+function TListCliente.SetData(aJson: TJSONValue): Boolean;
 var
   lJsonArray : TJSONArray;
 begin
-  Result := nil;
-  FRecordCount := aJson.GetValue<Integer>('records');
+  aJson.TryGetValue<Integer>('records', FRecordCount);
+
+  Result := FRecordCount > 0;
+
   if aJson.TryGetValue<TJSONArray>('data', lJsonArray) then begin
     SetDataSet(lJsonArray);
     SetList(lJsonArray);

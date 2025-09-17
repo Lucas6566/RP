@@ -59,9 +59,9 @@ type
     GridUF: TcxGridDBColumn;
     procedure btnIncluirClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
-    procedure btnPesquisarClick(Sender: TObject);
     procedure btnExcluirClick(Sender: TObject);
     procedure btnAlterarClick(Sender: TObject);
+    procedure btnSeachClick(Sender: TObject);
 
   private
     FPesquisa : iControllerCidade;
@@ -92,10 +92,10 @@ begin
   TFrmCadastroCidade.CidadeShow(TpInsert, FPesquisa);
 end;
 
-procedure TFrmPesquisaCidade.btnPesquisarClick(Sender: TObject);
+procedure TFrmPesquisaCidade.btnSeachClick(Sender: TObject);
 begin
   inherited;
-  FPesquisa.Find;
+  //FPesquisa.Find(FFieldSeach, edtSearch.Text);
 end;
 
 procedure TFrmPesquisaCidade.FormCreate(Sender: TObject);

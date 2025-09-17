@@ -1,5 +1,7 @@
 unit Rp.View.Principal;
 
+//RP - Realização de Processos
+
 interface
 
 uses
@@ -31,9 +33,14 @@ uses
   Rp.View.Pesquisa.Bairro,
   Rp.View.Pesquisa.Cliente,
   Rp.View.Pesquisa.Servico,
-  Rp.View.Pesquisa.TipoServico,
   Rp.View.Pesquisa.FormaPagamento,
-  Rp.View.Pesquisa.Venda;
+  Rp.View.Pesquisa.Venda,
+  dxGDIPlusClasses,
+  cxContainer,
+  cxEdit,
+  cxImage,
+  Rp.View.Login,
+  Rp.View.Pesquisa.OrdemServico;
 
 type
   TFrmPrincipal = class(TForm)
@@ -42,8 +49,6 @@ type
     lblData: TLabel;
     imgFechar: TImage;
     lblUsuario: TLabel;
-    Label1: TLabel;
-    Label2: TLabel;
     Bevel1: TBevel;
     pnlMenu: TPanel;
     pnlMenus: TmPanelButton;
@@ -63,10 +68,6 @@ type
     imgFormaPagto: TImage;
     pnlFuncionario: TmPanelButton;
     imgFuncionario: TImage;
-    pnlTipoServicos: TmPanelButton;
-    imgTipoServico: TImage;
-    pnlUsuarios: TmPanelButton;
-    imgUsuarios: TImage;
     pnlServicos: TmPanelButton;
     imgServicos: TImage;
     pnlClientes: TmPanelButton;
@@ -78,7 +79,12 @@ type
     pnlCidades: TmPanelButton;
     Image1: TImage;
     PnlVendas: TmPanelButton;
-    Image2: TImage;
+    imgVendas: TImage;
+    Panel1: TPanel;
+    Label1: TLabel;
+    Label2: TLabel;
+    pnlOrdensServicos: TmPanelButton;
+    Image3: TImage;
     procedure imgFecharClick(Sender: TObject);
     procedure pnlMenuCadastrosClick(Sender: TObject);
     procedure TmrSubMenuTimer(Sender: TObject);
@@ -92,8 +98,8 @@ type
     procedure pnlFuncionarioClick(Sender: TObject);
     procedure pnlFormaPagtoClick(Sender: TObject);
     procedure pnlServicosClick(Sender: TObject);
-    procedure pnlTipoServicosClick(Sender: TObject);
     procedure PnlVendasClick(Sender: TObject);
+    procedure pnlOrdensServicosClick(Sender: TObject);
   private
     FActiveForm: TForm;
 
@@ -139,6 +145,9 @@ end;
 
 procedure TFrmPrincipal.FormShow(Sender: TObject);
 begin
+  if not TFrmLogin.Login then
+    Application.Terminate;
+
   lblData.Caption := FormatDateTime('DD/MM/YYYY',Now);
   lblHora.Caption := FormatDateTime('hh:mm',Now);
 end;
@@ -154,6 +163,13 @@ end;
 procedure TFrmPrincipal.imgFecharClick(Sender: TObject);
 begin
   Close;
+end;
+
+procedure TFrmPrincipal.pnlOrdensServicosClick(Sender: TObject);
+var
+  LForm: TFrmPesquisaOrdemServico;
+begin
+  ShowForm(TFrmPesquisaOrdemServico, LForm);
 end;
 
 procedure TFrmPrincipal.pnlBairrosClick(Sender: TObject);
@@ -206,13 +222,6 @@ var
   LForm: TFrmPesquisaServico;
 begin
   ShowForm(TFrmPesquisaServico, LForm);
-end;
-
-procedure TFrmPrincipal.pnlTipoServicosClick(Sender: TObject);
-var
-  LForm: TFrmPesquisaTipoServico;
-begin
-  ShowForm(TFrmPesquisaTipoServico, LForm);
 end;
 
 procedure TFrmPrincipal.PnlVendasClick(Sender: TObject);

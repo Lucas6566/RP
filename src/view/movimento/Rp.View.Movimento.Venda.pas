@@ -51,8 +51,12 @@ uses
   Rp.Controller.VendaServico,
   Rp.Controller.VendaParcela,
   Rp.View.Busca.Cliente,
-  Rp.Controller.Cliente, Rp.Controller.Servico, Rp.View.Busca.Servico,
-  Rp.View.Movimento.VendaPagamento, cxMaskEdit, cxDropDownEdit;
+  Rp.Controller.Cliente,
+  Rp.Controller.Servico,
+  Rp.View.Busca.Servico,
+  Rp.View.Movimento.VendaPagamento,
+  cxMaskEdit,
+  cxDropDownEdit;
 
 type
   TFrmMovimentoVenda = class(TFrmBaseMovimento)
@@ -413,11 +417,6 @@ begin
   if Assigned(lServico) then begin
     edtIdServico.Text     := IntToStr(lServico.Entidade.id);
     edtDescrServico.Text  := lServico.Entidade.descricao;
-
-    lServico.TipoServico.Find(lServico.Entidade.Id_Tipo_Servico);
-
-    EdtIdTpServico.Text   := IntToStr(lServico.TipoServico.Entidade.id);
-    edtDescrTpServico.Text   := lServico.TipoServico.Entidade.Descricao;
 
     edtVlrUnitarioServico.Value := lServico.Entidade.Vlr_Venda;
     edtQtdeServico.Text         := '1';

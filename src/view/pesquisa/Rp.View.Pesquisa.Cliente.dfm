@@ -18,7 +18,6 @@ inherited FrmPesquisaCliente: TFrmPesquisaCliente
         ExplicitHeight = 484
         inherited GridPesquisa: TcxGrid
           Height = 484
-          ExplicitTop = 1
           ExplicitHeight = 484
           inherited GridPesquisaDBTableView: TcxGridDBTableView
             object GridCodigo: TcxGridDBColumn
@@ -46,15 +45,10 @@ inherited FrmPesquisaCliente: TFrmPesquisaCliente
               Width = 159
             end
             object GridEletronico: TcxGridDBColumn
-              Caption = 'End. Eletronico'
+              Caption = 'Email'
               DataBinding.FieldName = 'email'
               DataBinding.IsNullValueType = True
               Width = 100
-            end
-            object GridBairro: TcxGridDBColumn
-              Caption = 'Bairro'
-              DataBinding.FieldName = 'id_bairro'
-              DataBinding.IsNullValueType = True
             end
           end
         end
@@ -68,16 +62,12 @@ inherited FrmPesquisaCliente: TFrmPesquisaCliente
             StyleDisabled.LookAndFeel.SkinName = ''
             StyleFocused.LookAndFeel.SkinName = ''
             StyleHot.LookAndFeel.SkinName = ''
-            Transparent = True
             AnchorY = 26
           end
         end
         inherited pnlTopInfo: TPanel
           inherited pnlBotoes: TPanel
             ParentColor = True
-            inherited btnPesquisar: TSpeedButton
-              OnClick = btnPesquisarClick
-            end
             inherited btnExcluir: TSpeedButton
               OnClick = btnExcluirClick
             end

@@ -1,27 +1,27 @@
 inherited FrmMovimentoVenda: TFrmMovimentoVenda
   Caption = 'Venda'
-  ClientHeight = 558
-  ClientWidth = 1299
+  ClientHeight = 556
+  ClientWidth = 1291
   Font.Height = -11
-  ExplicitWidth = 1311
-  ExplicitHeight = 596
+  ExplicitWidth = 1303
+  ExplicitHeight = 594
   TextHeight = 13
   inherited pnlBackground: TPanel
-    Width = 1299
-    Height = 523
-    ExplicitWidth = 1295
-    ExplicitHeight = 522
+    Width = 1291
+    Height = 521
+    ExplicitWidth = 1287
+    ExplicitHeight = 520
     object pnlTop: TPanel
       Left = 0
       Top = 0
-      Width = 1299
+      Width = 1291
       Height = 37
       Align = alTop
       BevelOuter = bvNone
       ParentBackground = False
       ParentColor = True
       TabOrder = 0
-      ExplicitWidth = 1295
+      ExplicitWidth = 1287
       object Label3: TLabel
         Left = 7
         Top = 0
@@ -82,14 +82,14 @@ inherited FrmMovimentoVenda: TFrmMovimentoVenda
     object pnlCliente: TPanel
       Left = 0
       Top = 37
-      Width = 1299
+      Width = 1291
       Height = 37
       Align = alTop
       BevelOuter = bvNone
       ParentBackground = False
       ParentColor = True
       TabOrder = 1
-      ExplicitWidth = 1295
+      ExplicitWidth = 1287
       object Label2: TLabel
         Left = 7
         Top = 1
@@ -261,14 +261,14 @@ inherited FrmMovimentoVenda: TFrmMovimentoVenda
     object pnlServico: TPanel
       Left = 0
       Top = 74
-      Width = 1299
+      Width = 1291
       Height = 47
       Align = alTop
       BevelOuter = bvNone
       ParentBackground = False
       ParentColor = True
       TabOrder = 2
-      ExplicitWidth = 1295
+      ExplicitWidth = 1287
       object Label6: TLabel
         Left = 7
         Top = 0
@@ -787,21 +787,22 @@ inherited FrmMovimentoVenda: TFrmMovimentoVenda
     object pnlItensServico: TPanel
       Left = 0
       Top = 121
-      Width = 1299
-      Height = 402
+      Width = 1291
+      Height = 400
       Align = alClient
       BevelOuter = bvNone
       TabOrder = 3
-      ExplicitWidth = 1295
-      ExplicitHeight = 401
+      ExplicitWidth = 1287
+      ExplicitHeight = 399
       object GridPesquisa: TcxGrid
         Left = 0
         Top = 0
-        Width = 1299
-        Height = 356
+        Width = 1291
+        Height = 354
         Align = alClient
         TabOrder = 0
-        ExplicitTop = -5
+        ExplicitWidth = 1287
+        ExplicitHeight = 353
         object GridPesquisaDBTableView: TcxGridDBTableView
           Navigator.Buttons.CustomButtons = <>
           ScrollbarAnnotations.CustomAnnotations = <>
@@ -859,16 +860,16 @@ inherited FrmMovimentoVenda: TFrmMovimentoVenda
       end
       object Panel1: TPanel
         Left = 0
-        Top = 356
-        Width = 1299
+        Top = 354
+        Width = 1291
         Height = 46
         Align = alBottom
         BevelOuter = bvNone
         Color = 16578803
         ParentBackground = False
         TabOrder = 1
-        ExplicitTop = 355
-        ExplicitWidth = 1295
+        ExplicitTop = 353
+        ExplicitWidth = 1287
         object pnlTotais: TPanel
           Left = 0
           Top = 0
@@ -1045,17 +1046,18 @@ inherited FrmMovimentoVenda: TFrmMovimentoVenda
     end
   end
   inherited pnlBottom: TPanel
-    Top = 523
-    Width = 1299
-    ExplicitTop = 522
-    ExplicitWidth = 1295
+    Top = 521
+    Width = 1291
+    ExplicitTop = 520
+    ExplicitWidth = 1287
     inherited btnConfirm: TSpeedButton
-      Left = 1167
-      ExplicitLeft = 1173
+      Left = 1181
+      ExplicitLeft = 1187
+      ExplicitTop = 6
       ExplicitHeight = 35
     end
     inherited btnCancel: TSpeedButton
-      Left = 1035
+      Left = 1071
       ExplicitLeft = 1035
     end
   end
