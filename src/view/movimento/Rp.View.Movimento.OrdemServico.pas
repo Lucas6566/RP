@@ -424,7 +424,9 @@ end;
 
 procedure TFrmMovimentoOrdemServico.OpenRegisterServico;
 begin
-  FServico.Find(FOrdemServico.Entidade.Id);
+  FServico.Find(FOrdemServico.Entidade.Id);                          
+    
+  edtQtdeItens.Text    := FServico.RecordCount.ToString;
 end;
 
 class function TFrmMovimentoOrdemServico.OrdemServicoShow(
