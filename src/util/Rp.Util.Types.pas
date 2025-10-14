@@ -5,6 +5,17 @@ interface
 type
   TTypeOperation = (TpInsert, TpUpdate, TpDelete, TpSelect);
   TTypeMensagem = (tpAviso, tpErro, tpPergunta, tpInformacao);
+  TFormulario = (tfCidade,
+                tfFuncionario,
+                tfBairro,
+                tfCliente,
+                tfServico,
+                tfFormaPagamento,
+                tfVenda,
+                tfVendaParcela,
+                tfVendaServico,
+                tfMovimento,
+                tfMovimentoServico);
 
 implementation
 

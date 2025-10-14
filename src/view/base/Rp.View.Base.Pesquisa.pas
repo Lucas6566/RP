@@ -47,7 +47,8 @@ uses
   cxGrid,
   Vcl.ExtCtrls,
   Vcl.Imaging.pngimage,
-  Rp.Controller;
+  Rp.Controller,
+  Rp.Controller.Generic;
 
 type
   TFrmBasePesquisa = class(TFrmBase)
@@ -82,9 +83,6 @@ type
     FController : iController;
   end;
 
-var
-  FrmBasePesquisa: TFrmBasePesquisa;
-
 implementation
 
 {$R *.dfm}
@@ -92,7 +90,7 @@ implementation
 procedure TFrmBasePesquisa.btnSeachClick(Sender: TObject);
 begin
   inherited;
-  //
+  FData.Find;
 end;
 
 procedure TFrmBasePesquisa.edtSearchKeyPress(Sender: TObject; var Key: Char);
@@ -106,6 +104,8 @@ procedure TFrmBasePesquisa.FormCreate(Sender: TObject);
 begin
   inherited;
   FController := TController.New;
+  FData.DataSource(DS);
+  FData.Find;
 end;
 
 procedure TFrmBasePesquisa.FormShow(Sender: TObject);

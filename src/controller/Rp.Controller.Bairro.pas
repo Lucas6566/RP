@@ -57,9 +57,9 @@ implementation
 
 function TControllerBairro.Cidade: iControllerCidade;
 begin
-  if not Assigned(FCidade) then
-    FCidade := TControllerCidade.New;
-  Result := FCidade;
+//  if not Assigned(FCidade) then
+//    FCidade := TControllerCidade.New;
+//  Result := FCidade;
 end;
 
 constructor TControllerBairro.Create;

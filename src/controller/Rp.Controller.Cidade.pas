@@ -6,7 +6,12 @@ uses
   Data.DB,
   Rp.Model.Entity.Cidade,
   Rp.Model.Dao.Generic,
-  Rp.Model.List.Cidade, Rp.Model.Rest;
+  Rp.Model.List.Cidade,
+  Rp.Model.Rest,
+  Rp.Controller.Generic,
+  System.Generics.Collections,
+  System.JSON,
+  FireDAC.Comp.Client;
 
 type
   iControllerCidade = interface
@@ -23,27 +28,24 @@ type
     function Entidade : TCidade;
   end;
 
-  TControllerCidade = class(TInterfacedObject, iControllerCidade)
-  private
-    FEntidade : TCidade;
-    FDAOGeneric : iDAOGeneric;
-    FList : iListCidade;
-    FDataSource : TDataSource;
+  iControllerCidades = interface
+    ['{D28F256A-5C6C-4329-81EF-50EBB458DDB4}']
+  end;
+
+  {
+  //TControllerCidade = class(TControllerGeneric<TCidade>, iControllerCidades)
+    na verdade tem que seguir o mesmo exemplo da migraqção da Tools, é exatamente aquilo que to querendo fazer aquela service lá
+  }
+
+
+  TControllerCidade = class(TControllerGeneric<TCidade>, iControllerGeneric<TCidade>)
+  protected
+    procedure RequestSource; override;
 
   public
     constructor Create;
     destructor Destroy; override;
-    class function New : iControllerCidade;
-
-    function DataSource( aDataSource: TDataSource ): iControllerCidade;
-    function Find : iControllerCidade; overload;
-    function Find (const aID : String ) : iControllerCidade; overload;
-    function Insert : iControllerCidade;
-    function Delete : Boolean;
-    function Update : iControllerCidade;
-    function LocalizaEntidade : iControllerCidade;
-
-    function Entidade : TCidade;
+    class function New : iControllerGeneric<TCidade>;
   end;
 
 implementation
@@ -52,75 +54,23 @@ implementation
 
 constructor TControllerCidade.Create;
 begin
-  FList := TListCidade.New;
-  FDAOGeneric := TDAOGeneric.New;
-  FDAOGeneric.Request.Resource('cidade');
-end;
-
-function TControllerCidade.DataSource(
-  aDataSource: TDataSource): iControllerCidade;
-begin
-  Result := Self;
-  FDataSource := aDataSource;
-  FDataSource.DataSet := FList.DataSet;
-end;
-
-function TControllerCidade.Delete: Boolean;
-begin
-  Result := FDAOGeneric.Delete(FDataSource.DataSet.FieldByName('id').AsString);
-  Find;
+  inherited;
 end;
 
 destructor TControllerCidade.Destroy;
 begin
-  if Assigned(FEntidade) then
-    FEntidade.Free;
+
   inherited;
 end;
 
-function TControllerCidade.Entidade: TCidade;
-begin
-  if not Assigned(FEntidade) then
-    FEntidade := TCidade.Create;
-  Result := FEntidade;
-end;
-
-function TControllerCidade.Find: iControllerCidade;
-begin
-  Result := Self;
-  FList.SetData(FDAOGeneric.Find);
-end;
-
-function TControllerCidade.Find(const aID: String): iControllerCidade;
-begin
-  Result := Self;
-  FEntidade := FList.SetData(FDAOGeneric.Find(aID));
-end;
-
-function TControllerCidade.Insert: iControllerCidade;
-begin
-  Result := Self;
-  if FDAOGeneric.Insert(FList.GeneratorJson(FEntidade)) <> nil then
-    Find;
-end;
-
-function TControllerCidade.LocalizaEntidade: iControllerCidade;
-begin
-  Result := Self;
-  FEntidade := FList.LocalizaList;
-end;
-
-class function TControllerCidade.New: iControllerCidade;
+class function TControllerCidade.New: iControllerGeneric<TCidade>;
 begin
   Result := Self.Create;
 end;
 
-function TControllerCidade.Update: iControllerCidade;
+procedure TControllerCidade.RequestSource;
 begin
-  Result := Self;
-  FList.GetJson;
-  if FDAOGeneric.Update(FList.GetJson) then
-    Find;
+  DAOGeneric.Request.Resource('cidade');
 end;
 
 end.

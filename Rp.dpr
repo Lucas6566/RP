@@ -77,7 +77,9 @@ uses
   Rp.Model.List.MovimentoServico in 'src\model\list\Rp.Model.List.MovimentoServico.pas',
   Rp.View.Movimento.OrdemServico in 'src\view\movimento\Rp.View.Movimento.OrdemServico.pas' {FrmMovimentoOrdemServico},
   Rp.View.Pesquisa.OrdemServico in 'src\view\pesquisa\Rp.View.Pesquisa.OrdemServico.pas' {FrmPesquisaOrdemServico},
-  Rp.Model.Request in 'src\model\Rp.Model.Request.pas';
+  Rp.Model.Request in 'src\model\Rp.Model.Request.pas',
+  Rp.Controller.Generic in 'src\controller\Rp.Controller.Generic.pas',
+  Rp.Util.DataSet in 'src\util\Rp.Util.DataSet.pas';
 
 {$R *.res}
 

@@ -3,7 +3,6 @@ unit Rp.Controller;
 interface
 
 uses
-  Rp.Controller.Cidade,
   Rp.Controller.Funcionario,
   Rp.Controller.Bairro,
   Rp.Controller.Cliente,
@@ -11,13 +10,19 @@ uses
   Rp.Controller.FormaPagamento,
   Rp.Controller.Venda,
   Rp.Controller.VendaParcela,
-  Rp.Controller.VendaServico, Rp.Controller.Movimento,
-  Rp.Controller.MovimentoServico;
+  Rp.Controller.VendaServico,
+  Rp.Controller.Movimento,
+  Rp.Controller.MovimentoServico,
+  Rp.Model.Entity.Cidade,
+  Rp.Controller.Generic,
+  Rp.Util.Types,
+  System.Classes,
+  System.SysUtils;
 
 type
   iController = interface
     ['{897A06ED-8794-4777-A450-533DF07E70B5}']
-    function Cidade: iControllerCidade;
+    function Cidade: iControllerGeneric<TCidade>;
     function Funcionario: iControllerFuncionario;
     function Bairro: iControllerBairro;
     function Cliente: iControllerCliente;
@@ -28,11 +33,14 @@ type
     function VendaServico: iControllerVendaServico;
     function Movimento: iControllerMovimento;
     function MovimentoServico: iControllerMovimentoServico;
+
+    function Formulario: TProc; overload;
+    function Formulario(Formulario: TFormulario): iController; overload;
   end;
 
   TController = class(TInterfacedObject, iController)
   private
-    FCidade: iControllerCidade;
+    FCidade: iControllerGeneric<TCidade>;
     FFuncionario: iControllerFuncionario;
     FBairro: iControllerBairro;
     FCliente: iControllerCliente;
@@ -44,12 +52,13 @@ type
     FMovimento: iControllerMovimento;
     FMovimentoServico: iControllerMovimentoServico;
 
+    FFormulario: TFormulario;
   public
     constructor Create;
     destructor Destroy; override;
     class function New: iController;
 
-    function Cidade: iControllerCidade;
+    function Cidade: iControllerGeneric<TCidade>;
     function Funcionario: iControllerFuncionario;
     function Bairro: iControllerBairro;
     function Cliente: iControllerCliente;
@@ -60,13 +69,16 @@ type
     function VendaServico: iControllerVendaServico;
     function Movimento: iControllerMovimento;
     function MovimentoServico: iControllerMovimentoServico;
+
+    function Formulario: TProc; overload;
+    function Formulario(Formulario: TFormulario): iController; overload;
   end;
 
 implementation
 
 { TController }
 
-function TController.Cidade: iControllerCidade;
+function TController.Cidade: iControllerGeneric<TCidade>;
 begin
   if not Assigned(FCidade) then
     FCidade := TControllerCidade.New;
@@ -110,6 +122,28 @@ begin
   if not Assigned(FFuncionario) then
     FFuncionario := TControllerFuncionario.New;
   Result := FFuncionario;
+end;
+
+function TController.Formulario: TProc;
+begin
+  case FFormulario of
+    tfCidade          : Result := MovimentoServico;
+    tfFuncionario     : Movimento;
+    tfBairro          : VendaServico;
+    tfCliente         : VendaParcela;
+    tfServico         : Venda;
+    tfFormaPagamento  : FormaPagamento;
+    tfVenda           : Servico;
+    tfVendaParcela    : Cliente;
+    tfVendaServico    : Bairro;
+    tfMovimento       : Funcionario;
+    tfMovimentoServico: Cidade;
+  end;
+end;
+
+function TController.Formulario(Formulario: TFormulario): iController;
+begin
+  FFormulario := Formulario;
 end;
 
 function TController.Movimento: iControllerMovimento;
