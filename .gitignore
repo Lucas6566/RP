@@ -15,3 +15,4 @@ src/model/list/__recovery/
 Rp.identcache
 Bin/
 __history/
+src/view/base/__recovery/

@@ -264,6 +264,7 @@
         <DCCReference Include="src\model\Rp.Model.Request.pas"/>
         <DCCReference Include="src\controller\Rp.Controller.Generic.pas"/>
         <DCCReference Include="src\util\Rp.Util.DataSet.pas"/>
+        <DCCReference Include="src\util\Rp.Util.EntityJSON.pas"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

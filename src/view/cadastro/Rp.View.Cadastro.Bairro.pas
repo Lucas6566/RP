@@ -31,7 +31,7 @@ uses
   Vcl.Menus,
   cxButtons,
   Rp.Controller.Cidade,
-  Rp.View.Busca.Cidade;
+  Rp.View.Busca.Cidade, Rp.Model.Entity.Cidade, Rp.Controller.Generic;
 
 type
   TFrmCadastroBairro = class(TFrmBaseCadastro)
@@ -42,26 +42,27 @@ type
     edtTaxaEntrega: TcxCurrencyEdit;
     Label3: TLabel;
     edtCidade: TEdit;
-    edtCodigoCidade: TEdit;
-    Label5: TLabel;
     Label4: TLabel;
     pnlSeachCidade: TPanel;
     btnSeachCidade: TSpeedButton;
     EdtUf: TEdit;
     Label6: TLabel;
+    edtCodigoCidade: TEdit;
     procedure btnConfirmClick(Sender: TObject);
     procedure btnSeachCidadeClick(Sender: TObject);
   private
     FCadastro : iControllerBairro;
-    FCidade : iControllerCidade;
+    FCidade : TCidade;
 
     procedure GetController(aCadastro: iControllerBairro);
 
-    procedure OpenRegister;
     procedure IncludeData;
     procedure IncludeRegister;
 
     procedure SeachCidade;
+  protected
+    procedure OpenRegister; override;
+
   public
     class function BairroShow(aTypeOperation : TTypeOperation; aCadastro : iControllerBairro ): Boolean;
   end;
@@ -107,7 +108,6 @@ end;
 procedure TFrmCadastroBairro.GetController(aCadastro: iControllerBairro);
 begin
   FCadastro := aCadastro;
-  FCidade := FCadastro.Cidade;
 end;
 
 procedure TFrmCadastroBairro.IncludeData;
@@ -137,8 +137,8 @@ begin
     edtTaxaEntrega.value := FCadastro.Entidade.Taxa_entrega;
     edtCodigoCidade.Text := IntToStr(FCadastro.Entidade.id_cidade);
 
-    FCidade.Find(edtCodigoCidade.Text);
-    edtCidade.Text := FCidade.Entidade.nome;
+    //FCidade.Find(edtCodigoCidade.Text);
+    edtCidade.Text := FCidade.nome;
   end;
 end;
 
@@ -146,9 +146,9 @@ procedure TFrmCadastroBairro.SeachCidade;
 begin
   FCidade := TFrmBuscaCidade.ShowBuscaCidade;
   if Assigned(FCidade) then begin
-    edtCodigoCidade.Text := intToStr(FCidade.Entidade.id);
-    edtCidade.Text       := FCidade.Entidade.nome;
-    edtUF.Text           := FCidade.Entidade.uf;
+    edtCodigoCidade.Text := intToStr(FCidade.id);
+    edtCidade.Text       := FCidade.nome;
+    edtUF.Text           := FCidade.uf;
   end;
 end;
 

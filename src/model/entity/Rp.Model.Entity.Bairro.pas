@@ -2,6 +2,9 @@ unit Rp.Model.Entity.Bairro;
 
 interface
 
+uses
+  Rp.Model.Entity.Cidade;
+
 type
   TBairro = class(TObject)
   private
@@ -9,6 +12,7 @@ type
     FNome: String;
     FTaxa_entrega: Currency;
     FId_cidade: Int64;
+    Fcidade: TCidade;
     procedure SetId(const aValue: Int64);
     procedure SetNome(const aValue: String);
     procedure SetTaxa_entrega(const Value: Currency);
@@ -18,6 +22,7 @@ type
     property id: Int64 read FId write SetId;
     property nome: String read FNome write SetNome;
     property Taxa_entrega: Currency read FTaxa_entrega write SetTaxa_entrega;
+    property cidade: TCidade read Fcidade write Fcidade;
     property Id_cidade: Int64 read FId_cidade write SetId_cidade;
   end;
 

@@ -9,20 +9,26 @@ uses
   Rp.Model.Dao.Generic,
   System.JSON,
   FireDAC.Comp.Client,
-  Rp.Util.DataSet;
+  Rp.Util.DataSet,
+  Rp.Util.EntityJSON,
+  System.StrUtils,
+  System.Math;
 
 type
-  iControllerGeneric<T : Class> = interface
+  iControllerGeneric<T : Class, constructor> = interface
     ['{615DC1F9-6F12-4050-93C0-2FE6DC8B2204}']
 
     function Find : iControllerGeneric<T>; overload;
     function Find (const ID : String ) : iControllerGeneric<T>; overload;
+    function Find (const Param, Value : String ) : iControllerGeneric<T>; overload;
     function Insert : iControllerGeneric<T>;
     function Delete : Boolean;
     function Update : iControllerGeneric<T>;
-    function LocalizaEntidade : iControllerGeneric<T>;
+    function SetEntidade : T;
 
     function Entidade : T;
+
+    function NewEntidade: iControllerGeneric<T>;
 
     function DataSource : TDataSource; overload;
     function DataSource( Value : TDataSource ): iControllerGeneric<T>; overload;
@@ -33,9 +39,8 @@ type
     function List ( Value: TList<T> ): iControllerGeneric<T>; overload;
   end;
 
-  TControllerGeneric<T : class> = class(TInterfacedObject, iControllerGeneric<T>)
+  TControllerGeneric<T : class, constructor> = class(TInterfacedObject, iControllerGeneric<T>)
   private
-    FEntidade : T;
     FDAOGeneric : iDAOGeneric;
     FList: TList<T>;
     FDataSet : TRpDataSet;
@@ -43,8 +48,11 @@ type
     FDataSource : TDataSource;
     FRecordCount: Integer;
 
-    procedure JsonValueToData(JsonValue: TJsonValue);
+    procedure JSONValueToData(JsonValue: TJsonValue);
+    function EntitiesToJSONObject: TJSONObject;
   protected
+    FEntidade : T;
+
     property DAOGeneric: iDAOGeneric read FDAOGeneric write FDAOGeneric;
 
     procedure RequestSource; virtual;
@@ -55,14 +63,17 @@ type
     destructor Destroy; override;
     class function New : iControllerGeneric<T>;
 
+  public
     function Find : iControllerGeneric<T>; overload;
     function Find (const ID : String ) : iControllerGeneric<T>; overload;
+    function Find (const Param, Value : String ) : iControllerGeneric<T>; overload;
     function Insert : iControllerGeneric<T>;
     function Delete : Boolean;
     function Update : iControllerGeneric<T>;
-    function LocalizaEntidade : iControllerGeneric<T>;
+    function SetEntidade : T;
 
     function Entidade : T;
+    function NewEntidade: iControllerGeneric<T>;
 
     function DataSource : TDataSource; overload;
     function DataSource( Value : TDataSource ): iControllerGeneric<T>; overload;
@@ -72,7 +83,9 @@ type
     function List : TList<T>; overload;
     function List ( Value: TList<T> ): iControllerGeneric<T>; overload;
 
+  public
     property RecordCount: Integer read FRecordCount write FRecordCount;
+
   end;
 
 implementation
@@ -95,7 +108,7 @@ end;
 
 procedure TControllerGeneric<T>.CreateFieldsDataSet;
 begin
-  //
+  //Virtual
 end;
 
 function TControllerGeneric<T>.DataSet: TRpDataSet;
@@ -118,21 +131,39 @@ end;
 
 function TControllerGeneric<T>.Delete: Boolean;
 begin
-
+  Result := FDAOGeneric.Delete(DataSet.FieldByName('id').AsString);
+  Find;
 end;
 
 destructor TControllerGeneric<T>.Destroy;
 begin
+  if Assigned(FEntidade) then
+    FEntidade.Free;
+
   FList.Clear;
   FList.Free;
 
   DataSet.Free;
   inherited;
 end;
-
 function TControllerGeneric<T>.Entidade: T;
 begin
+  Result := FEntidade;
+end;
 
+function TControllerGeneric<T>.EntitiesToJSONObject: TJSONObject;
+begin
+  Result := nil;
+
+  if Assigned(FEntidade) then
+    Result := TEntityJSON.EntityToJSONObject(FEntidade);
+end;
+
+function TControllerGeneric<T>.Find(const Param,
+  Value: String): iControllerGeneric<T>;
+begin
+  FDAOGeneric.Request.AddParam(Param, Value);
+  Result := Find;
 end;
 
 function TControllerGeneric<T>.Find(const ID: String): iControllerGeneric<T>;
@@ -147,7 +178,9 @@ end;
 
 function TControllerGeneric<T>.Insert: iControllerGeneric<T>;
 begin
-
+  Result := Self;
+  if Assigned(FDAOGeneric.Insert(TEntityJSON.EntityToJSONObject(FEntidade))) then
+    Find;
 end;
 
 procedure TControllerGeneric<T>.JsonValueToData(JsonValue: TJsonValue);
@@ -171,24 +204,33 @@ begin
   Result := FList;
 end;
 
-function TControllerGeneric<T>.LocalizaEntidade: iControllerGeneric<T>;
-begin
-
-end;
-
 class function TControllerGeneric<T>.New: iControllerGeneric<T>;
 begin
   Result := Self.Create;
 end;
 
+function TControllerGeneric<T>.NewEntidade: iControllerGeneric<T>;
+begin
+  //Virtual
+end;
+
 procedure TControllerGeneric<T>.RequestSource;
 begin
+  //Virtual
+end;
 
+function TControllerGeneric<T>.SetEntidade: T;
+begin
+  if Assigned(FEntidade) then
+    FEntidade.Free;
+  FEntidade := DataSet.ToObject<T>;
+  Result := FEntidade;
 end;
 
 function TControllerGeneric<T>.Update: iControllerGeneric<T>;
 begin
-
+  if FDAOGeneric.Update(TEntityJSON.EntityToJSONObject(FEntidade)) then
+    Find;
 end;
 
 end.

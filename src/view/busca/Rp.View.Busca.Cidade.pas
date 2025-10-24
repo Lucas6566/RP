@@ -43,7 +43,8 @@ uses
   cxGridDBTableView,
   cxGrid,
   Vcl.ExtCtrls,
-  Rp.Controller.Cidade;
+  Rp.Controller.Cidade,
+  Rp.Model.Entity.Cidade, Rp.Controller.Generic;
 
 type
   TFrmBuscaCidade = class(TFrmBaseBusca)
@@ -52,9 +53,9 @@ type
     GridDocumento: TcxGridDBColumn;
     procedure FormCreate(Sender: TObject);
   private
-    FCidade : iControllerCidade;
+    FCidade : iControllerGeneric<TCidade>;
   public
-    class function ShowBuscaCidade: iControllerCidade;
+    class function ShowBuscaCidade: TCidade;
   end;
 
 var
@@ -71,18 +72,18 @@ begin
   inherited;
   FCidade := TControllerCidade.New;
   FCidade.DataSource(DS)
-          .Find;
+         .Find;
 end;
 
-class function TFrmBuscaCidade.ShowBuscaCidade: iControllerCidade;
+class function TFrmBuscaCidade.ShowBuscaCidade: TCidade;
 begin
   FrmBuscaCidade := TFrmBuscaCidade.Create(nil);
   try
     result := nil;
     FrmBuscaCidade.ShowModal;
     if FrmBuscaCidade.ModalResult = mrOk then begin
-      FrmBuscaCidade.FCidade.LocalizaEntidade;
-      result := FrmBuscaCidade.FCidade;
+      if Assigned(FrmBuscaCidade.FCidade.SetEntidade) then
+        result := FrmBuscaCidade.FCidade.Entidade;
     end;
   finally
     FreeAndNil(FrmBuscaCidade);

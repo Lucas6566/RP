@@ -1,4 +1,3 @@
-
 unit Rp.View.Pesquisa.Cidade;
 
 interface
@@ -64,10 +63,10 @@ type
     procedure btnExcluirClick(Sender: TObject);
     procedure btnAlterarClick(Sender: TObject);
     procedure btnSeachClick(Sender: TObject);
-
   private
     FPesquisa : iControllerGeneric<TCidade>;
-    //FPesquisa : iControllerGeneric<TCidade>;
+  protected
+    procedure Search; virtual;
   public
 
   end;
@@ -79,35 +78,39 @@ implementation
 procedure TFrmPesquisaCidade.btnAlterarClick(Sender: TObject);
 begin
   inherited;
-  //TFrmCadastroCidade.CidadeShow(TpUpdate, FPesquisa);
+  TFrmCadastroCidade.CidadeShow(TpUpdate, FPesquisa);
 end;
 
 procedure TFrmPesquisaCidade.btnExcluirClick(Sender: TObject);
 begin
   inherited;
   if Mensagem('Você deseja fazer a exclusão da cidade '+DS.DataSet.FieldByName('nome').AsString, tpPergunta) then
-    FData.Delete;
+    FPesquisa.Delete;
 end;
 
 procedure TFrmPesquisaCidade.btnIncluirClick(Sender: TObject);
 begin
   inherited;
-  //TFrmCadastroCidade.CidadeShow(TpInsert, FPesquisa);
+  TFrmCadastroCidade.CidadeShow(TpInsert, FPesquisa);
 end;
 
 procedure TFrmPesquisaCidade.btnSeachClick(Sender: TObject);
 begin
   inherited;
-  //FPesquisa.Find(FFieldSeach, edtSearch.Text);
-  //FData.Find;
+  Search;
 end;
 
 procedure TFrmPesquisaCidade.FormCreate(Sender: TObject);
 begin
-  FData := TControllerCidade.New;
   inherited;
-//  FPesquisa.DataSource(DS);
-//  FPesquisa.Find;
+  FPesquisa := TControllerCidade.New;
+  FPesquisa.DataSource(DS)
+           .Find;
+end;
+
+procedure TFrmPesquisaCidade.Search;
+begin
+  FPesquisa.Find;
 end;
 
 end.

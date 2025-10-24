@@ -79,7 +79,8 @@ uses
   Rp.View.Pesquisa.OrdemServico in 'src\view\pesquisa\Rp.View.Pesquisa.OrdemServico.pas' {FrmPesquisaOrdemServico},
   Rp.Model.Request in 'src\model\Rp.Model.Request.pas',
   Rp.Controller.Generic in 'src\controller\Rp.Controller.Generic.pas',
-  Rp.Util.DataSet in 'src\util\Rp.Util.DataSet.pas';
+  Rp.Util.DataSet in 'src\util\Rp.Util.DataSet.pas',
+  Rp.Util.EntityJSON in 'src\util\Rp.Util.EntityJSON.pas';
 
 {$R *.res}
 

@@ -73,10 +73,10 @@ type
     procedure btnIncluirClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure btnSeachClick(Sender: TObject);
+
+    procedure Search; override;
   private
     FPesquisa : iControllerMovimento;
-
-    procedure Search;
   end;
 
 implementation

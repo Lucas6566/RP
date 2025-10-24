@@ -26,19 +26,39 @@ type
     destructor Destroy;
 
     procedure LoadData( Value: TJSONArray );
+    function DataToJson: TJSONObject;
+    function ToObject<T: class, constructor>: T;
   end;
 
 implementation
+
+uses
+  REST.Json;
 
 constructor TRpDataSet.Create;
 begin
   inherited Create(nil);
 end;
 
+function TRpDataSet.DataToJson: TJSONObject;
+begin
+  Result := Self.ToJSONObject;
+end;
+
 destructor TRpDataSet.Destroy;
 begin
   Free;
   inherited;
+end;
+
+function TRpDataSet.ToObject<T>: T;
+begin
+  var JSON := DataToJson;
+  try
+    Result := TJson.JsonToObject<T>(JSON, []);
+  finally
+    JSON.Free;
+  end;
 end;
 
 procedure TRpDataSet.LoadData(Value: TJSONArray);

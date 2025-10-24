@@ -1,15 +1,15 @@
 inherited FrmCadastroCidade: TFrmCadastroCidade
   Caption = 'Cidade'
-  ClientHeight = 111
-  ClientWidth = 377
-  ExplicitWidth = 389
-  ExplicitHeight = 149
+  ClientHeight = 109
+  ClientWidth = 369
+  ExplicitWidth = 385
+  ExplicitHeight = 148
   TextHeight = 15
   inherited pnlBackground: TPanel
-    Width = 377
-    Height = 111
-    ExplicitWidth = 373
-    ExplicitHeight = 110
+    Width = 369
+    Height = 109
+    ExplicitWidth = 369
+    ExplicitHeight = 109
     object Label1: TLabel [0]
       Left = 16
       Top = 16
@@ -32,17 +32,17 @@ inherited FrmCadastroCidade: TFrmCadastroCidade
       Caption = 'UF'
     end
     inherited pnlBottom: TPanel
-      Top = 76
-      Width = 377
-      ExplicitTop = 75
-      ExplicitWidth = 373
+      Top = 75
+      Width = 373
+      ExplicitTop = 74
+      ExplicitWidth = 369
       inherited btnConfirm: TSpeedButton
-        Left = 267
-        ExplicitLeft = 255
+        Left = 263
+        ExplicitLeft = 269
         ExplicitHeight = 35
       end
       inherited btnCancel: TSpeedButton
-        Left = 157
+        Left = 153
         ExplicitLeft = 119
       end
     end

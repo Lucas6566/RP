@@ -1,75 +1,68 @@
 inherited FrmCadastroBairro: TFrmCadastroBairro
   Caption = 'Bairro'
-  ClientHeight = 160
-  ClientWidth = 471
-  ExplicitWidth = 487
-  ExplicitHeight = 199
+  ClientHeight = 154
+  ClientWidth = 366
+  ExplicitWidth = 378
+  ExplicitHeight = 192
   TextHeight = 15
   inherited pnlBackground: TPanel
-    Width = 471
-    Height = 160
-    ExplicitWidth = 471
-    ExplicitHeight = 160
+    Width = 366
+    Height = 154
+    ExplicitWidth = 340
+    ExplicitHeight = 153
     object Label1: TLabel [0]
       Left = 16
-      Top = 16
+      Top = 15
       Width = 39
       Height = 15
       Caption = 'C'#243'digo'
     end
     object Label2: TLabel [1]
-      Left = 96
-      Top = 16
+      Left = 79
+      Top = 15
       Width = 31
       Height = 15
       Caption = 'Bairro'
     end
     object Label3: TLabel [2]
-      Left = 316
-      Top = 16
+      Left = 15
+      Top = 63
       Width = 82
       Height = 15
       Caption = 'Taxa de Entrega'
     end
-    object Label5: TLabel [3]
-      Left = 16
-      Top = 62
-      Width = 39
-      Height = 15
-      Caption = 'C'#243'digo'
-    end
-    object Label4: TLabel [4]
-      Left = 96
-      Top = 62
+    object Label4: TLabel [3]
+      Left = 104
+      Top = 63
       Width = 37
       Height = 15
       Caption = 'Cidade'
     end
-    object Label6: TLabel [5]
-      Left = 316
-      Top = 62
+    object Label6: TLabel [4]
+      Left = 294
+      Top = 63
       Width = 14
       Height = 15
       Caption = 'UF'
     end
     inherited pnlBottom: TPanel
-      Top = 126
-      Width = 475
-      ExplicitTop = 125
-      ExplicitWidth = 471
+      Top = 119
+      Width = 366
+      ExplicitTop = 118
+      ExplicitWidth = 340
       inherited btnConfirm: TSpeedButton
-        Left = 365
+        Left = 256
         ExplicitLeft = 347
       end
       inherited btnCancel: TSpeedButton
-        Left = 255
+        Left = 146
         ExplicitLeft = 215
       end
     end
     object edtCodigo: TEdit
-      Left = 16
-      Top = 32
-      Width = 73
+      Left = 17
+      Top = 33
+      Width = 56
       Height = 23
       BevelInner = bvNone
       BevelOuter = bvNone
@@ -77,45 +70,36 @@ inherited FrmCadastroBairro: TFrmCadastroBairro
       TabOrder = 1
     end
     object edtNome: TEdit
-      Left = 96
-      Top = 32
-      Width = 214
+      Left = 79
+      Top = 33
+      Width = 267
       Height = 23
       BevelInner = bvNone
       BevelOuter = bvNone
       TabOrder = 2
     end
     object edtTaxaEntrega: TcxCurrencyEdit
-      Left = 316
-      Top = 32
+      Left = 15
+      Top = 81
       TabOrder = 3
-      Width = 121
+      Width = 82
     end
     object edtCidade: TEdit
-      Left = 96
-      Top = 80
-      Width = 214
+      Left = 139
+      Top = 81
+      Width = 154
       Height = 23
       BevelInner = bvNone
       BevelOuter = bvNone
       TabOrder = 4
     end
-    object edtCodigoCidade: TEdit
-      Left = 16
-      Top = 80
-      Width = 73
-      Height = 23
-      BevelInner = bvNone
-      BevelOuter = bvNone
-      TabOrder = 5
-    end
     object pnlSeachCidade: TPanel
-      Left = 346
-      Top = 80
+      Left = 321
+      Top = 81
       Width = 25
       Height = 23
       BevelOuter = bvSpace
-      TabOrder = 6
+      TabOrder = 5
       object btnSeachCidade: TSpeedButton
         Left = 1
         Top = 1
@@ -182,10 +166,19 @@ inherited FrmCadastroBairro: TFrmCadastroBairro
       end
     end
     object EdtUf: TEdit
-      Left = 316
-      Top = 80
+      Left = 294
+      Top = 81
       Width = 26
       Height = 23
+      TabOrder = 6
+    end
+    object edtCodigoCidade: TEdit
+      Left = 104
+      Top = 81
+      Width = 34
+      Height = 23
+      BevelInner = bvNone
+      BevelOuter = bvNone
       TabOrder = 7
     end
   end

@@ -17,7 +17,7 @@ uses
   Rp.Controller.Generic,
   Rp.Util.Types,
   System.Classes,
-  System.SysUtils;
+  System.SysUtils, Rp.Controller.Cidade;
 
 type
   iController = interface
@@ -33,9 +33,6 @@ type
     function VendaServico: iControllerVendaServico;
     function Movimento: iControllerMovimento;
     function MovimentoServico: iControllerMovimentoServico;
-
-    function Formulario: TProc; overload;
-    function Formulario(Formulario: TFormulario): iController; overload;
   end;
 
   TController = class(TInterfacedObject, iController)
@@ -69,9 +66,6 @@ type
     function VendaServico: iControllerVendaServico;
     function Movimento: iControllerMovimento;
     function MovimentoServico: iControllerMovimentoServico;
-
-    function Formulario: TProc; overload;
-    function Formulario(Formulario: TFormulario): iController; overload;
   end;
 
 implementation
@@ -122,28 +116,6 @@ begin
   if not Assigned(FFuncionario) then
     FFuncionario := TControllerFuncionario.New;
   Result := FFuncionario;
-end;
-
-function TController.Formulario: TProc;
-begin
-  case FFormulario of
-    tfCidade          : Result := MovimentoServico;
-    tfFuncionario     : Movimento;
-    tfBairro          : VendaServico;
-    tfCliente         : VendaParcela;
-    tfServico         : Venda;
-    tfFormaPagamento  : FormaPagamento;
-    tfVenda           : Servico;
-    tfVendaParcela    : Cliente;
-    tfVendaServico    : Bairro;
-    tfMovimento       : Funcionario;
-    tfMovimentoServico: Cidade;
-  end;
-end;
-
-function TController.Formulario(Formulario: TFormulario): iController;
-begin
-  FFormulario := Formulario;
 end;
 
 function TController.Movimento: iControllerMovimento;

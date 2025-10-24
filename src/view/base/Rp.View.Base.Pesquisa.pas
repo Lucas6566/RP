@@ -81,6 +81,8 @@ type
   protected
     FFieldSeach : String;
     FController : iController;
+
+    procedure Search; virtual;
   end;
 
 implementation
@@ -90,22 +92,20 @@ implementation
 procedure TFrmBasePesquisa.btnSeachClick(Sender: TObject);
 begin
   inherited;
-  FData.Find;
+  Search;
 end;
 
 procedure TFrmBasePesquisa.edtSearchKeyPress(Sender: TObject; var Key: Char);
 begin
   inherited;
   if Key = chr(13) then
-    btnSeachClick(nil);
+    Search;
 end;
 
 procedure TFrmBasePesquisa.FormCreate(Sender: TObject);
 begin
   inherited;
   FController := TController.New;
-  FData.DataSource(DS);
-  FData.Find;
 end;
 
 procedure TFrmBasePesquisa.FormShow(Sender: TObject);
@@ -120,6 +120,11 @@ begin
   inherited;
   FFieldSeach := AColumn.DataBinding.FilterFieldName;
   LblSearch.Caption := 'Fitrar ' + AColumn.Caption;
+end;
+
+procedure TFrmBasePesquisa.Search;
+begin
+  //
 end;
 
 end.

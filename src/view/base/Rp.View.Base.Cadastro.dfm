@@ -1,6 +1,5 @@
 inherited FrmBaseCadastro: TFrmBaseCadastro
   Caption = 'FrmBaseCadastro'
-  Position = poMainFormCenter
   OnCreate = FormCreate
   ExplicitWidth = 628
   ExplicitHeight = 477

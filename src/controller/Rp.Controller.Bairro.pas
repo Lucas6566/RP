@@ -6,7 +6,11 @@ uses
   Data.DB,
   Rp.Model.Entity.Bairro,
   Rp.Model.Dao.Generic,
-  Rp.Model.List.Bairro, Rp.Model.Rest, Rp.Controller.Cidade;
+  Rp.Model.List.Bairro,
+  Rp.Model.Rest,
+  Rp.Controller.Cidade,
+  Rp.Model.Entity.Cidade,
+  Rp.Controller.Generic;
 
 type
   iControllerBairro = interface
@@ -22,7 +26,7 @@ type
 
     function Entidade : TBairro;
 
-    function Cidade : iControllerCidade;
+    function Cidade : iControllerGeneric<TCidade>;
   end;
 
   TControllerBairro = class(TInterfacedObject, iControllerBairro)
@@ -31,7 +35,7 @@ type
     FDAOGeneric : iDAOGeneric;
     FList : iListBairro;
     FDataSource : TDataSource;
-    FCidade : iControllerCidade;
+    FCidade : iControllerGeneric<TCidade>;
 
   public
     constructor Create;
@@ -48,14 +52,14 @@ type
 
     function Entidade : TBairro;
 
-    function Cidade : iControllerCidade;
+    function Cidade : iControllerGeneric<TCidade>;
   end;
 
 implementation
 
 { TControllerBairro }
 
-function TControllerBairro.Cidade: iControllerCidade;
+function TControllerBairro.Cidade: iControllerGeneric<TCidade>;
 begin
 //  if not Assigned(FCidade) then
 //    FCidade := TControllerCidade.New;
@@ -66,7 +70,6 @@ constructor TControllerBairro.Create;
 begin
   FList := TListBairro.New;
   FDAOGeneric := TDAOGeneric.New;
-  //FDAOGeneric.Request(ConnRequest.Resource('bairro'));
   FDAOGeneric.Request.Resource('bairro');
 end;
 

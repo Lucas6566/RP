@@ -75,7 +75,6 @@ inherited FrmPesquisaOrdemServico: TFrmPesquisaOrdemServico
         ExplicitWidth = 960
         inherited PnlTopTitle: TPanel
           Width = 960
-          ExplicitTop = -4
           ExplicitWidth = 960
           inherited lblTitleForm: TcxLabel
             Caption = 'Ordem de Servi'#231'o'

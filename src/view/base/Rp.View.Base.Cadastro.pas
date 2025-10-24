@@ -25,6 +25,11 @@ type
     procedure FormCreate(Sender: TObject);
     procedure btnConfirmClick(Sender: TObject);
     procedure btnCancelClick(Sender: TObject);
+
+  protected
+    function CadastroShow(const TypeOperation : TTypeOperation): Boolean;
+    procedure OpenRegister; virtual;
+
   public
     FTypeOperation: TTypeOperation;
 
@@ -52,10 +57,24 @@ begin
   ModalResult := mrOk;
 end;
 
+function TFrmBaseCadastro.CadastroShow(
+  const TypeOperation: TTypeOperation): Boolean;
+begin
+  FTypeOperation := TypeOperation;
+  OpenRegister;
+  ShowModal;
+  Result := ModalResult = mrOk;
+end;
+
 procedure TFrmBaseCadastro.FormCreate(Sender: TObject);
 begin
   inherited;
   FController := TController.New;
+end;
+
+procedure TFrmBaseCadastro.OpenRegister;
+begin
+  //
 end;
 
 end.

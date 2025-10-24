@@ -2,6 +2,9 @@ unit Rp.Model.Entity.Cidade;
 
 interface
 
+uses
+  Rp.Util.EntityJSON;
+
 type
   TCidade = class(TObject)
   private

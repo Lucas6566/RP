@@ -16,7 +16,10 @@ uses
   Vcl.Buttons,
   Vcl.ExtCtrls,
   Vcl.StdCtrls,
-  Rp.Util.Types, Rp.Controller.Cidade;
+  Rp.Util.Types,
+  Rp.Controller.Cidade,
+  Rp.Model.Entity.Cidade,
+  Rp.Controller.Generic;
 
 type
   TFrmCadastroCidade = class(TFrmBaseCadastro)
@@ -28,17 +31,14 @@ type
     Label3: TLabel;
     procedure btnConfirmClick(Sender: TObject);
   private
-    FCadastro : iControllerCidade;
+    FCadastro : iControllerGeneric<TCidade>;
 
-    procedure OpenRegister;
+    procedure OpenRegister; override;
     procedure IncludeData;
     procedure IncludeRegister;
   public
-    class function CidadeShow(aTypeOperation : TTypeOperation; aCadastro : iControllerCidade ): Boolean;
+    class function CidadeShow(TypeOperation : TTypeOperation; Cadastro : iControllerGeneric<TCidade> ): Boolean;
   end;
-
-var
-  FrmCadastroCidade: TFrmCadastroCidade;
 
 implementation
 
@@ -55,17 +55,15 @@ begin
 end;
 
 class function TFrmCadastroCidade.CidadeShow(
-  aTypeOperation : TTypeOperation; aCadastro : iControllerCidade ): Boolean;
+  TypeOperation : TTypeOperation; Cadastro : iControllerGeneric<TCidade> ): Boolean;
 begin
-  FrmCadastroCidade := TFrmCadastroCidade.Create(nil);
+  var Form := TFrmCadastroCidade.Create(nil);
   try
-    FrmCadastroCidade.FTypeOperation := aTypeOperation;
-    FrmCadastroCidade.FCadastro := aCadastro;
-    FrmCadastroCidade.OpenRegister;
-    FrmCadastroCidade.ShowModal;
-    Result := FrmCadastroCidade.ModalResult = mrOk;
+    Form.FCadastro := Cadastro;
+
+    Result := Form.CadastroShow(TypeOperation);
   finally
-    FreeAndNil(FrmCadastroCidade);
+    FreeAndNil(Form);
   end;
 end;
 
@@ -88,12 +86,15 @@ end;
 
 procedure TFrmCadastroCidade.OpenRegister;
 begin
-  if FTypeOperation = TpUpdate then begin
-    FCadastro.LocalizaEntidade;
+  if FTypeOperation = TpUpdate then
+  begin
+    FCadastro.SetEntidade;
     edtCodigo.Text := IntToStr(FCadastro.Entidade.Id);
     edtNome.Text := FCadastro.Entidade.Nome;
     edtUf.Text := FCadastro.Entidade.Uf;
-  end;
+  end
+  else
+    FCadastro.NewEntidade;
 end;
 
 end.
